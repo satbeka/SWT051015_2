@@ -16,7 +16,7 @@ public class PropertiesBuilder {
     //static final String GLOBAL_CFG_XML = "all_structure.xml";
     public static Properties _prop = new Properties();
     static String GLOBAL_CFG_PATH = ""
-           + "D:\\SWT\\test\\"
+           + "C:\\idea prj\\SWT051015 2\\res\\"
             ;
 
     private static void loadProperties() {

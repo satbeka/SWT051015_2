@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/out/production/SWT051015 2" />
+    <output-test url="file://$MODULE_DIR$/out/test/SWT051015 2" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="swt-4.3" level="project" />
-    <orderEntry type="library" name="ojdbc6-11.2.0.2.0" level="project" />
+    <orderEntry type="library" exported="" scope="PROVIDED" name="swt-4.3" level="project" />
+    <orderEntry type="library" exported="" scope="PROVIDED" name="ojdbc6-11.2.0.2.0" level="project" />
+    <orderEntry type="library" name="ojdbc6-11.2.0.2.0 (2)" level="project" />
+    <orderEntry type="library" name="swt-4.3 (2)" level="project" />
   </component>
 </module>

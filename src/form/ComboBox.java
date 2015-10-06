@@ -5,11 +5,10 @@ import model.Upragnenie;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.FillLayout;
+
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 
 import java.util.Arrays;
