@@ -23,17 +23,20 @@ public class ComboBox {
     private static String comboSborChoose="";
     private static String comboUpagnChoose="";
     private static Shell shell;
+    private static Label labelD;
+    private static Text titleDate;
+    private static Button openUpragn;
 
     public static void main(String[] args) {
         Display display = new Display();
         shell = new Shell(display);
-        GridLayout layout = new GridLayout(5, false);
+        GridLayout layout = new GridLayout(2, false);
         shell.setLayout(layout);
 
         //UserData userData=new UserData();
         // Create a dropdown Combo
         Label labelSbor=new Label(shell,SWT.NONE);
-        labelSbor.setText("Choose Sbor: ");
+        labelSbor.setText("1 Choose Sbor: ");
         //labelSbor.setLocation(1020,20);
         final Combo comboSbor = new Combo(shell, SWT.DROP_DOWN);
 
@@ -52,15 +55,15 @@ public class ComboBox {
 
         // create new layout data
         GridData data = new GridData(SWT.FILL, SWT.TOP, true, false);
-        data.horizontalSpan = 2;
+        data.horizontalSpan = 3;
         //rowLayout.center;
         //shell.setLayout(gridLayout);
 
         final Button open;
         open = new Button (shell, SWT.PUSH);
         open.setLayoutData(data);
-        open.setLocation(100, 100);
-        open.setText(" Choose date ");
+        open.setLocation(10, 10);
+        open.setText(" 2 Choose date ");
 
         open.addSelectionListener(new SelectionAdapter() {
             public void widgetSelected(SelectionEvent e) {
@@ -81,7 +84,17 @@ public class ComboBox {
                         System.out.println("Calendar date selected (MM/DD/YYYY) = " + (calendar.getMonth() + 1) + "/" + calendar.getDay() + "/" + calendar.getYear());
                         System.out.println("Date selected (MM/YYYY) = " + (date.getMonth() + 1) + "/" + date.getYear());
                         System.out.println("Time selected (HH:MM) = " + time.getHours() + ":" + time.getMinutes());
+
+                        openUpragn.setVisible(true);
+                        labelD.setVisible(true);
+                        titleDate.setVisible(true);
+
+                        titleDate.setText("Calendar date selected (MM/DD/YYYY) = " + (calendar.getMonth() + 1) + "/" + calendar.getDay() + "/" + calendar.getYear());
+
+
                         dialog.close();
+
+                        //textDate
                     }
                 });
                 dialog.setDefaultButton(ok);
@@ -95,27 +108,45 @@ public class ComboBox {
         data = new GridData(SWT.FILL, SWT.TOP, true, false);
         data.horizontalSpan = 2;
 
+        // TextDate
+        labelD = new Label(shell, SWT.NULL);
+        labelD.setText("# Chosen Date is ");
+        titleDate = new Text(shell, SWT.SINGLE | SWT.BORDER);
+        GridData gridData = new GridData(GridData.HORIZONTAL_ALIGN_FILL);
+        gridData.horizontalSpan = 3;
+        titleDate.setLayoutData(gridData);
+        labelD.setVisible(false);
+        titleDate.setVisible(false);
+
+
+// create new layout data
+        data = new GridData(SWT.FILL, SWT.TOP, true, false);
+        data.horizontalSpan = 2;
+
         // Title
         final Label label = new Label(shell, SWT.NULL);
         label.setText("# trenirvk ");
-        final Text title = new Text(shell, SWT.SINGLE | SWT.BORDER);
-        GridData gridData = new GridData(GridData.HORIZONTAL_ALIGN_FILL);
+        final Text titleTrenik = new Text(shell, SWT.SINGLE | SWT.BORDER);
+        gridData = new GridData(GridData.HORIZONTAL_ALIGN_FILL);
         gridData.horizontalSpan = 3;
-        title.setLayoutData(gridData);
+        titleTrenik.setLayoutData(gridData);
         label.setVisible(false);
-        title.setVisible(false);
+        titleTrenik.setVisible(false);
 
 
 
-        final Button openUpragn;
+
         openUpragn = new Button (shell, SWT.PUSH);
-        openUpragn.setLayoutData(data);
-        openUpragn.setLocation(100, 100);
-        openUpragn.setText(" Choose Upragnenia ");
+        gridData = new GridData(GridData.HORIZONTAL_ALIGN_FILL);
+        gridData.horizontalSpan = 3;
+        openUpragn.setLayoutData(gridData);
+        //openUpragn.setLocation(100, 100);
+        openUpragn.setText(" 3 Choose Upragnenia ");
+        openUpragn.setVisible(false);
 
         // Create a dropdown Combo
         Label labelUpragn=new Label(shell,SWT.NONE);
-        labelUpragn.setText("Choose Upragn: ");
+        labelUpragn.setText("3 Choose Upragn: ");
         //labelSbor.setLocation(1020,20);
         final Combo comboUpragn = new Combo(shell, SWT.DROP_DOWN);
 
@@ -124,12 +155,12 @@ public class ComboBox {
         Iterator<Upragnenie> iteratorU = listU.iterator();
         int iU=0;
         upragnItems=new String[listU.size()];
-        while (iterator.hasNext()) {
+        while (iteratorU.hasNext()) {
             //System.out.println(iterator.next().getName());
-            upragnItems[iU]=iterator.next().getName();
+            upragnItems[iU]=iteratorU.next().getName();
             iU++;
         }
-        System.out.println(upragnItems[3]);
+        System.out.println(upragnItems[2]);
         comboUpragn.setItems(upragnItems);
 
         comboUpragn.addSelectionListener(new SelectionAdapter() {
@@ -146,22 +177,31 @@ public class ComboBox {
             }
         });
         comboUpragn.setVisible(false);
+        labelUpragn.setVisible(false);
 
 
         openUpragn.addSelectionListener(new SelectionAdapter() {
             public void widgetSelected(SelectionEvent e) {
+
+                if (titleTrenik.getText().isEmpty()) {
+                    MessageBox messageBox = new MessageBox(shell, SWT.ICON_WARNING | SWT.ABORT | SWT.RETRY | SWT.IGNORE);
+
+                    messageBox.setText("Warning");
+                    messageBox.setMessage(" Treninrk is empty! ");
+                    return;
+                }
+                comboUpragn.setVisible(true);
+
+                /*
                 final Shell dialog = new Shell(shell, SWT.DIALOG_TRIM);
                 dialog.setLayout(new GridLayout(3, false));
 
-
-
-                comboUpragn.setVisible(true);
-
                 dialog.pack();
                 dialog.open();
+                */
             }
         });
-        openUpragn.setVisible(false);
+
 
 
 
@@ -178,10 +218,9 @@ public class ComboBox {
                 if (!comboSborChoose.isEmpty()){
 
 
-
                     open.setVisible(true);
                     label.setVisible(true);
-                    title.setVisible(true);
+                    titleTrenik.setVisible(true);
 
 
 
