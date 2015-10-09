@@ -2,27 +2,19 @@ package form;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.*;
 
-public class SWTGroup extends Composite
+public class SWTGroup2 extends Composite
 {
-    public SWTGroup(Composite parent)
+    public SWTGroup2(Composite parent)
     {
         super(parent, SWT.NONE);
         this.setSize(600, 600);
 
         Group group = new Group(this,SWT.PUSH);
-        group.setLocation(10, 10);
+        group.setLocation(610, 610);
         //group.setSize(1000,1000);
         //group.setSize(200,300);
-        group.setText("Group of Dictionaries");
 
-        Group group2 = new Group(this,SWT.PUSH);
-        group2.setLocation(10, 290);
-        group2.setText("Group of Tab10");
-        Button button2 = new Button(group2, SWT.PUSH);
-        button2.setText(" Tab10 Facti");
-        button2.setLocation(460,100);//button.setLocation(470, 240);
-        button2.pack();
-
+        group.setText("Group of Dictionaries2");
 
         Label label = new Label(group, SWT.PUSH);
         label.setText("Fill ");
@@ -132,11 +124,10 @@ public class SWTGroup extends Composite
 
         Button button = new Button(group, SWT.PUSH);
         button.setText("Dobavit v tab10");
-        button.setLocation(470, 240);
+        button.setLocation(470,240);
         button.pack();
 
         group.pack();
-        group2.pack();
 
     }
 }

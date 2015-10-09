@@ -233,6 +233,7 @@ public class App {
 
       //shell3.setSize(600,600);
       SWTGroup swtGroup = new SWTGroup(shell3);
+      SWTGroup2 swtGroup2 = new SWTGroup2(shell3);
 
       shell3.pack();
       shell3.open();
