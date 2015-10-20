@@ -4,7 +4,6 @@ package form;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Display;
@@ -26,7 +25,6 @@ public class App {
   MenuItem fileMenuHeader, dictMenuHeader, nagrzkaMenuHeader, helpMenuHeader;
 
   MenuItem fileExitItem, fileSaveItem, dictSprotsmensItem, dictSboriItem, dictUprgItem, 
-  fillDataItem,
   nagrzkaF9Item,
   helpGetHelpItem;
 
@@ -82,10 +80,6 @@ public class App {
     nagrzkaMenu = new Menu(shell, SWT.DROP_DOWN);
     nagrzkaMenuHeader.setMenu(nagrzkaMenu);
 
-
-    fillDataItem = new MenuItem(nagrzkaMenu, SWT.PUSH);
-    fillDataItem.setText("&fillDataItem");
-
     nagrzkaF9Item = new MenuItem(nagrzkaMenu, SWT.PUSH);
     nagrzkaF9Item.setText("&nagrzk F9");
     //nagr
@@ -105,7 +99,6 @@ public class App {
     dictSboriItem.addSelectionListener(new dictSboriItemiListener());
     dictSprotsmensItem.addSelectionListener(new dictSprotsmensItemListener());
     dictUprgItem.addSelectionListener(new dictUprgItemListener());
-    fillDataItem.addSelectionListener(new fillDataItemListener());
     nagrzkaF9Item.addSelectionListener(new nagrzkaF9ItemListener());
 
     shell.setMenuBar(menuBar);
@@ -156,7 +149,7 @@ public class App {
       arrayList.add("Sbor3;11.11.3015");
       TableOnForm tableOnForm=new TableOnForm();
       tableOnForm.setDisplay2(display);
-      tableOnForm.load(arrayList, "Sbori", "name", "data_sbora");
+      tableOnForm.load(arrayList,"Sbori","name","data_sbora");
 
 
     }
@@ -206,7 +199,6 @@ public class App {
     }
   }
 
-
   class nagrzkaF9ItemListener implements SelectionListener {
     public void widgetSelected(SelectionEvent event) {
       label.setText("Saved");
@@ -214,38 +206,6 @@ public class App {
 
     public void widgetDefaultSelected(SelectionEvent event) {
       label.setText("Saved");
-    }
-  }
-
-
-  class fillDataItemListener implements SelectionListener {
-    public void widgetSelected(SelectionEvent event) {
-      label.setText("fillDataItemListener");
-
-
-      Shell shell3 = new Shell(display);
-      shell3.setText("Fill DATA ");
-/*
-      FillLayout fillLayout = new FillLayout();
-      fillLayout.type = SWT.VERTICAL;
-      shell3.setLayout(fillLayout);
-      */
-
-      //shell3.setSize(600,600);
-      SWTGroup swtGroup = new SWTGroup(shell3);
-      SWTGroup2 swtGroup2 = new SWTGroup2(shell3);
-
-      shell3.pack();
-      shell3.open();
-
-
-
-
-
-    }
-
-    public void widgetDefaultSelected(SelectionEvent event) {
-      label.setText("fillDataItemListener");
     }
   }
 
