@@ -13,5 +13,6 @@
     <orderEntry type="library" exported="" scope="PROVIDED" name="ojdbc6-11.2.0.2.0" level="project" />
     <orderEntry type="library" name="ojdbc6-11.2.0.2.0 (2)" level="project" />
     <orderEntry type="library" name="swt-4.3 (2)" level="project" />
+    <orderEntry type="library" exported="" scope="PROVIDED" name="sqlite-jdbc-3.7.2-sources" level="project" />
   </component>
 </module>
