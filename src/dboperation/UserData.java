@@ -2,6 +2,8 @@ package dboperation;
 
 import common.OracleDB;
 import common.OracleSQL;
+import common.SQLiteDB;
+import common.SQLiteSQL;
 import model.Sbor;
 import model.Upragnenie;
 
@@ -98,7 +100,7 @@ public class UserData  {
 
 
 
-    public static ArrayList<Sbor> getSbor() {
+    public static ArrayList<Sbor> getSborFromOracle() {
 
         ArrayList<Sbor> listSbor = new ArrayList<Sbor>();
 
@@ -170,7 +172,7 @@ public class UserData  {
 
     }
 
-    public static ArrayList<Upragnenie> getUpragn() {
+    public static ArrayList<Upragnenie> getUpragnFromOracle() {
 
         ArrayList<Upragnenie> listUprg = new ArrayList<Upragnenie>();
 
@@ -242,6 +244,145 @@ public class UserData  {
 
     }
 
+
+    public static ArrayList<Sbor> getSborFromSQLite() {
+
+        ArrayList<Sbor> listSbor = new ArrayList<Sbor>();
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.getSQLselListSbor();
+
+        System.out.println("SqlView SQLite=" + SqlView);
+if (conn==null){
+    Sbor sbor = new Sbor();
+    sbor.setName("connection not work");
+    listSbor.add(sbor);
+    return listSbor;};
+
+        try {
+
+            Statement statement = conn.createStatement();
+
+
+            ResultSet rs=statement.executeQuery(SqlView);
+            System.out.println("   User SqlView.executeQ().......");
+            //conn.commit();
+            int k = 0;
+
+            while (rs.next()) {
+
+                Sbor sbor = new Sbor();
+
+                sbor.setName(rs.getString(1));
+                System.out.println("rs.getDate(2)="+rs.getDate(2));
+                sbor.setData_sbora(rs.getDate(2));
+                k++;
+
+                listSbor.add(sbor);
+
+            };
+
+/*
+            String dt1Str;
+            String dt2Str;
+            //if (dt1==null){dt1Str="01/01/1000";}
+            System.out.println(dt1);
+            SimpleDateFormat dtF = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            dt1Str = dtF.format(dt1);
+            System.out.println("222 dt1Str=" + dt1Str);
+            //Date dt2 = new Date();
+            //dt2.setTime(dt1.getTime() + 1 * 24 * 60 * 60 * 1000);
+            dt2Str = dtF.format(dt2);
+            System.out.println("dt2str=" + dt2Str);
+*/
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return listSbor;
+
+    }
+
+    public static ArrayList<Upragnenie> getUpragnFromSQLite() {
+
+        ArrayList<Upragnenie> listUprg = new ArrayList<Upragnenie>();
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.getSQLselListUpragnenie();
+        System.out.println("SqlView SQLite Up=" + SqlView);
+        if (conn==null){
+            Upragnenie upragnenie = new Upragnenie();
+            upragnenie.setName("connection not work");
+            listUprg.add(upragnenie);
+            return listUprg;};
+
+
+        try {
+
+            PreparedStatement pS = conn.prepareStatement(SqlView);
+            //pS.executeUpdate();
+            ResultSet rs = pS.executeQuery(SqlView);
+            System.out.println("   User SqlView.executeQ().......");
+            conn.commit();
+            int k = 0;
+
+            while (rs.next()) {
+
+                Upragnenie upragnenie = new Upragnenie();
+
+                upragnenie.setName(rs.getString(1));
+                upragnenie.setShort_name(rs.getString(2));
+                k++;
+
+                listUprg.add(upragnenie);
+
+            };
+
+/*
+            String dt1Str;
+            String dt2Str;
+            //if (dt1==null){dt1Str="01/01/1000";}
+            System.out.println(dt1);
+            SimpleDateFormat dtF = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            dt1Str = dtF.format(dt1);
+            System.out.println("222 dt1Str=" + dt1Str);
+            //Date dt2 = new Date();
+            //dt2.setTime(dt1.getTime() + 1 * 24 * 60 * 60 * 1000);
+            dt2Str = dtF.format(dt2);
+            System.out.println("dt2str=" + dt2Str);
+*/
+
+            if (pS != null) {
+                pS.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return listUprg;
+
+    }
 
 
 

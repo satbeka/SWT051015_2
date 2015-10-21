@@ -40,7 +40,7 @@ public class ComboBox {
         final Combo comboSbor = new Combo(shell, SWT.DROP_DOWN);
 
         System.out.println("#1 iterator");
-        List<Sbor> list=UserData.getSbor();
+        List<Sbor> list=UserData.getSborFromSQLite();
         Iterator<Sbor> iterator = list.iterator();
         int i=0;
         sborItems=new String[list.size()];
@@ -150,7 +150,7 @@ public class ComboBox {
         final Combo comboUpragn = new Combo(shell, SWT.DROP_DOWN);
 
         System.out.println("#2 iterator");
-        List<Upragnenie> listU=UserData.getUpragn();
+        List<Upragnenie> listU=UserData.getUpragnFromSQLite();
         Iterator<Upragnenie> iteratorU = listU.iterator();
         int iU=0;
         upragnItems=new String[listU.size()];

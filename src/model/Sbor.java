@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 /**
  * Created by SAbdikalikov on 05.10.2015.
  */
@@ -22,5 +24,15 @@ public class Sbor {
 
     private String name;
     private String short_name;
+
+    public Date getData_sbora() {
+        return data_sbora;
+    }
+
+    public void setData_sbora(Date data_sbora) {
+        this.data_sbora = data_sbora;
+    }
+
+    private Date data_sbora;
 
 }

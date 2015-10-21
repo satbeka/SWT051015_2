@@ -5,8 +5,11 @@
 <entry key="password">ercb</entry>
 <entry key="sign_checkTSP">false</entry>
 <entry key="urlJDBC">jdbc:oracle:thin:@ala-srv-db-tst1.tisr.kz:1521:TEST01</entry>
+
+    <entry key="urlSQLiteJDBC">jdbc:sqlite:C:/SQLiteDB/a.s3db</entry>
+
 <entry key="username">ercb</entry>
-<entry key="SQLselListSbor">select t.name,t.name_short from SBOR t</entry>
-<entry key="SQLselListUpragnenie">select t.name,t.name_short from UPRAGNENIE t</entry>
+<entry key="SQLselListSbor">SELECT name,data_sbora FROM sbor</entry>
+<entry key="SQLselListUpragnenie">select name,short_name from UPRAGNENIE</entry>
 
 </properties>

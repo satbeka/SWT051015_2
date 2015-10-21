@@ -2,6 +2,7 @@ package form;
 
 
 
+import dboperation.UserData;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Event;
@@ -11,6 +12,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
+import util.DataTransform;
 
 import java.util.ArrayList;
 
@@ -144,9 +146,14 @@ public class App {
       //label.setText(event.text);
 
       ArrayList arrayList=new ArrayList();
+      arrayList= DataTransform.getSborCsv(
+              UserData.getSborFromSQLite());
+
+      /*
       arrayList.add("Sbor1;18.02.2015");
       arrayList.add("Sbor2;08.08.1015");
       arrayList.add("Sbor3;11.11.3015");
+      */
       TableOnForm tableOnForm=new TableOnForm();
       tableOnForm.setDisplay2(display);
       tableOnForm.load(arrayList,"Sbori","name","data_sbora");
@@ -183,12 +190,15 @@ public class App {
       label.setText("Uprg");
 
       ArrayList arrayList=new ArrayList();
+      arrayList=UserData.getUpragnFromSQLite();
+      /*
       arrayList.add("Beg 100;Beg");
       arrayList.add("Beg 800;Beg");
       arrayList.add("Skakalka;CPY");
       arrayList.add("Razminka;OFP");
       arrayList.add("Razminka;CPY");
       arrayList.add("Rabota v parax;CTTM");
+      */
       TableOnForm tableOnForm=new TableOnForm();
       tableOnForm.setDisplay2(display);
       tableOnForm.load(arrayList, "Uprgs", "upragnenei ", "group_upragn ");
