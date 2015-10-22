@@ -5,6 +5,7 @@ import common.OracleSQL;
 import common.SQLiteDB;
 import common.SQLiteSQL;
 import model.Sbor;
+import model.Sprotsmens;
 import model.Upragnenie;
 
 import java.math.BigDecimal;
@@ -111,6 +112,32 @@ public class DataTransform {
         for (int i = 0; i < sborArrayList.size(); i++) {
             sbor=sborArrayList.get(i);
             str=sbor.getName()+";"+DataTransform.getDateToStr(sbor.getData_sbora());
+            System.out.println("str="+str);
+            arrRez.add(str);
+        }
+
+
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return arrRez;
+
+    }
+
+    public static ArrayList<String> getSprotsmensCsv(ArrayList<Sprotsmens> sportsmensArrayList) {
+
+        ArrayList<String> arrRez=new ArrayList<>();
+        //"Sbori","name","data_sbora"
+        System.out.println("getSprotsmensCsv=" + sportsmensArrayList);
+
+        int k = 0;
+        Sprotsmens sportsmens;
+        String str;
+
+        for (int i = 0; i < sportsmensArrayList.size(); i++) {
+            sportsmens=sportsmensArrayList.get(i);
+            str=sportsmens.getFio()+";"+DataTransform.getDateToStr(sportsmens.getDate_birth());
             System.out.println("str="+str);
             arrRez.add(str);
         }

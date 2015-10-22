@@ -36,7 +36,7 @@ public class App {
 
     display = new Display();
     shell = new Shell(display);
-    shell.setText("Menu Racshet Расчет нагрузки");
+    shell.setText("Menu Racshet пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
     shell.setSize(600, 300);
 
     label = new Label(shell, SWT.CENTER);
@@ -50,7 +50,7 @@ public class App {
     fileMenuHeader.setMenu(fileMenu);
 
     fileSaveItem = new MenuItem(fileMenu, SWT.PUSH);
-    fileSaveItem.setText("&Change PWD Сменить пароль");
+    fileSaveItem.setText("&Change PWD пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ");
 
     fileExitItem = new MenuItem(fileMenu, SWT.PUSH);
     fileExitItem.setText("E&xit");
@@ -169,12 +169,16 @@ public class App {
     public void widgetSelected(SelectionEvent event) {
       label.setText("dictSprotsmensItemListener");
       ArrayList arrayList=new ArrayList();
+      /*
       arrayList.add("Drogba;18.02.2010");
       arrayList.add("Snalone;08.08.1055");
       arrayList.add("Anarbai Champion Bee Best;11.11.1001");
       arrayList.add("Anarbai Champion Bee Best;11.11.1002");
       arrayList.add("Anarbai Champion Bee Best;11.11.1003");
       arrayList.add("Anarbai Champion Bee Best;11.11.1004");
+      */
+      arrayList= DataTransform.getSprotsmensCsv(
+              UserData.getSprotsmensFromSQLite());
       TableOnForm tableOnForm=new TableOnForm();
       tableOnForm.setDisplay2(display);
       tableOnForm.load(arrayList, "Sprotsmens", "fio", "data_birth");

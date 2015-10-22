@@ -9,6 +9,9 @@ public class SQLiteSQL {
     private static String SQLselLitogo=null;
     private static String SQLinsTblForUser=null;
     private static String SQLupdTblForUser=null;
+    private static String SQLselSprotsmens=null;
+
+
 
     public static String getSQLselListSbor()
     {
@@ -16,6 +19,14 @@ public class SQLiteSQL {
             SQLselListSbor = PropertiesBuilder.getProperty("SQLselListSbor");
         }
         return SQLselListSbor;
+    }
+
+    public static String getSQLselSprotsmens()
+    {
+        if (SQLselSprotsmens == null) {
+            SQLselSprotsmens = PropertiesBuilder.getProperty("SQLselSprotsmens");
+        }
+        return SQLselSprotsmens;
     }
 
     public static String getSQLselListTrenirvka()

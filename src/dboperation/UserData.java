@@ -5,6 +5,7 @@ import common.OracleSQL;
 import common.SQLiteDB;
 import common.SQLiteSQL;
 import model.Sbor;
+import model.Sprotsmens;
 import model.Upragnenie;
 
 
@@ -274,7 +275,7 @@ if (conn==null){
                 Sbor sbor = new Sbor();
 
                 sbor.setName(rs.getString(1));
-                System.out.println("rs.getDate(2)="+rs.getDate(2));
+                System.out.println("rs.getDate(2)=" + rs.getDate(2));
                 sbor.setData_sbora(rs.getDate(2));
                 k++;
 
@@ -313,6 +314,77 @@ if (conn==null){
         //System.out.println(listTisr_non_market);
 
         return listSbor;
+
+    }
+
+    public static ArrayList<Sprotsmens> getSprotsmensFromSQLite() {
+
+        ArrayList<Sprotsmens> listSprotsmens = new ArrayList<Sprotsmens>();
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.getSQLselSprotsmens();
+
+        System.out.println("SqlView SQLite Sprotsmens=" + SqlView);
+        if (conn==null){
+            Sprotsmens sprotsmens = new Sprotsmens();
+            sprotsmens.setFio("connection not work");
+            listSprotsmens.add(sprotsmens);
+            return listSprotsmens;};
+
+        try {
+
+            Statement statement = conn.createStatement();
+
+
+            ResultSet rs=statement.executeQuery(SqlView);
+            System.out.println("   User SqlView.executeQ().......");
+            //conn.commit();
+            int k = 0;
+
+            while (rs.next()) {
+
+                Sprotsmens sprotsmens = new Sprotsmens();
+
+                sprotsmens.setFio(rs.getString(1));
+                //System.out.println("rs.getDate(2)="+rs.getDate(2));
+                sprotsmens.setDate_birth(rs.getDate(2));
+                k++;
+
+                listSprotsmens.add(sprotsmens);
+
+            };
+
+/*
+            String dt1Str;
+            String dt2Str;
+            //if (dt1==null){dt1Str="01/01/1000";}
+            System.out.println(dt1);
+            SimpleDateFormat dtF = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            dt1Str = dtF.format(dt1);
+            System.out.println("222 dt1Str=" + dt1Str);
+            //Date dt2 = new Date();
+            //dt2.setTime(dt1.getTime() + 1 * 24 * 60 * 60 * 1000);
+            dt2Str = dtF.format(dt2);
+            System.out.println("dt2str=" + dt2Str);
+*/
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return listSprotsmens;
 
     }
 

@@ -10,6 +10,9 @@
 
 <entry key="username">ercb</entry>
 <entry key="SQLselListSbor">SELECT name,data_sbora FROM sbor</entry>
+    <entry key="SQLselSprotsmens">SELECT fio,date_birth FROM sportsmens</entry>
 <entry key="SQLselListUpragnenie">select name,short_name from UPRAGNENIE</entry>
+
+
 
 </properties>
