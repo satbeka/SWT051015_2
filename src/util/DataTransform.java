@@ -111,7 +111,7 @@ public class DataTransform {
 
         for (int i = 0; i < sborArrayList.size(); i++) {
             sbor=sborArrayList.get(i);
-            str=sbor.getName()+";"+DataTransform.getDateToStr(sbor.getData_sbora());
+            str=sbor.getId()+";"+sbor.getName()+";"+DataTransform.getDateToStr(sbor.getData_sbora());
             System.out.println("str="+str);
             arrRez.add(str);
         }
@@ -137,8 +137,8 @@ public class DataTransform {
 
         for (int i = 0; i < sportsmensArrayList.size(); i++) {
             sportsmens=sportsmensArrayList.get(i);
-            str=sportsmens.getFio()+";"+DataTransform.getDateToStr(sportsmens.getDate_birth());
-            System.out.println("str="+str);
+            str=sportsmens.getId()+";"+sportsmens.getFio()+";"+DataTransform.getDateToStr(sportsmens.getDate_birth());
+            System.out.println("str sportsmens="+str);
             arrRez.add(str);
         }
 

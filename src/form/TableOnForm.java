@@ -21,10 +21,11 @@ public class TableOnForm {
 
     private Table table;
     private TableColumn stringColumn1,stringColumn2,dateColumn,doubleColumn,hourColumn;
+    private String tabTitle;
 
     Menu contextMenu;
 
-    public void load(ArrayList arrayList,String tabTitle,String itTitle1,String itTitle2) {
+    public void load(ArrayList arrayList,String tabTitle,String itTitleId, String itTitle1,String itTitle2) {
 
         shell2 = new Shell(display2);
 
@@ -36,6 +37,10 @@ public class TableOnForm {
         table = new Table(shell2, SWT.HIDE_SELECTION | SWT.SINGLE | SWT.FULL_SELECTION | SWT.BORDER);
         table.setHeaderVisible(true);
         table.setLinesVisible(true);
+
+        stringColumn1 = new TableColumn(table, SWT.CENTER);
+        stringColumn1.setText(itTitleId);
+        stringColumn1.setWidth(120);
 
         stringColumn1 = new TableColumn(table, SWT.CENTER);
         stringColumn1.setText(itTitle1);
@@ -65,7 +70,7 @@ public class TableOnForm {
 */
 
         // let's populate the table with random data!
-        String strV1;String strV2;int k;
+        String strV1;String strV;String strV2;String strV3;int k;
         for (int i = 0; i < arrayList.size(); i++) {
 
 
@@ -74,10 +79,14 @@ public class TableOnForm {
             String v=arrayList.get(i).toString();
             //item.setText(v);
             k=v.indexOf(";");
-            strV1=v.substring(0,k);
-            strV2=v.substring(k+1);
+            strV1=v.substring(0, k);
 
-            item.setText(new String[]{strV1, strV2});
+            strV=v.substring(k+1);
+            k=strV.indexOf(";");
+            strV2=strV.substring(0, k);
+            strV3=strV.substring(k + 1);
+
+            item.setText(new String[]{strV1, strV2,strV3});
 
             //item.setText(new String[] { int_value, string_value, date_value, double_value, hour_value });
 
@@ -89,15 +98,43 @@ public class TableOnForm {
         //MouseEventExample myMouseEventExample = new MouseEventExample(shell2);
         shell2.pack();
 
+        this.tabTitle=tabTitle; //name of tbl in Db
+        System.out.println("tabTitle="+tabTitle);
 
         contextMenu = new Menu(table);
         table.setMenu(contextMenu);
         MenuItem mItem1 = new MenuItem(contextMenu, SWT.None);
         MenuItem mItem2 = new MenuItem(contextMenu, SWT.None);
         MenuItem mItem3 = new MenuItem(contextMenu, SWT.None);
-        mItem1.setText(" Dobavit Test.");
-        mItem2.setText(" Redaktirov Test.");
-        mItem3.setText(" Ydalit Test.");
+        mItem1.setText(" Add Test.");
+        mItem2.setText(" Edit Test.");
+        mItem3.setText(" Delete Test.");
+
+
+        //Insert
+        mItem1.addListener(SWT.Selection, new Listener() {
+            public void handleEvent(Event e) {
+                System.out.println("Add Test.");
+
+
+
+            }
+        });
+
+        //Edit
+        mItem2.addListener(SWT.Selection, new Listener() {
+            public void handleEvent(Event e) {
+                System.out.println("Edit Test.");
+
+
+            }
+        });
+
+
+
+
+
+
 
         table.addMouseListener(new MouseListener() {
             public void mouseDown(MouseEvent e) {
@@ -105,6 +142,8 @@ public class TableOnForm {
                 if (e.button==3){
 
                     contextMenu.setVisible(true);
+                    System.out.println("tabTitle="+tabTitle);
+
 
 
                 }

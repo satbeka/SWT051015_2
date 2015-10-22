@@ -9,9 +9,13 @@
     <entry key="urlSQLiteJDBC">jdbc:sqlite:C:/SQLiteDB/a.s3db</entry>
 
 <entry key="username">ercb</entry>
-<entry key="SQLselListSbor">SELECT name,data_sbora FROM sbor</entry>
-    <entry key="SQLselSprotsmens">SELECT fio,date_birth FROM sportsmens</entry>
-<entry key="SQLselListUpragnenie">select name,short_name from UPRAGNENIE</entry>
+<entry key="SQLselListSbor">SELECT id,name,data_sbora FROM sbor</entry>
+    <entry key="SQLselSprotsmens">SELECT id,fio,date_birth FROM sportsmens</entry>
+<entry key="SQLselListUpragnenie">select id,name,short_name from UPRAGNENIE</entry>
+
+    <entry key="SQLinsSbor">insert into sbor(name,short_name,data_sbora) values (?,' 444 ',?)</entry>
+    <entry key="SQLupdSbor">update sbor set name='?',data_sbora=to_date('?') where id=?</entry>
+    <entry key="SQLdelSbor">delete sbor where id=?</entry>
 
 
 

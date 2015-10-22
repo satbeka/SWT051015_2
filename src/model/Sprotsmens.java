@@ -22,4 +22,14 @@ public class Sprotsmens {
 
     private String fio;
     private Date date_birth;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
 }

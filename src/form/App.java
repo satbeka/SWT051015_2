@@ -156,7 +156,7 @@ public class App {
       */
       TableOnForm tableOnForm=new TableOnForm();
       tableOnForm.setDisplay2(display);
-      tableOnForm.load(arrayList,"Sbori","name","data_sbora");
+      tableOnForm.load(arrayList,"Sbori","id","name","data_sbora");
 
 
     }
@@ -181,7 +181,7 @@ public class App {
               UserData.getSprotsmensFromSQLite());
       TableOnForm tableOnForm=new TableOnForm();
       tableOnForm.setDisplay2(display);
-      tableOnForm.load(arrayList, "Sprotsmens", "fio", "data_birth");
+      tableOnForm.load(arrayList, "Sprotsmens", "id", "fio", "data_birth");
 
     }
 
@@ -205,7 +205,7 @@ public class App {
       */
       TableOnForm tableOnForm=new TableOnForm();
       tableOnForm.setDisplay2(display);
-      tableOnForm.load(arrayList, "Uprgs", "upragnenei ", "group_upragn ");
+      tableOnForm.load(arrayList, "Uprgs","id", "upragnenei ", "group_upragn ");
     }
 
     public void widgetDefaultSelected(SelectionEvent event) {

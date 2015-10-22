@@ -274,9 +274,10 @@ if (conn==null){
 
                 Sbor sbor = new Sbor();
 
-                sbor.setName(rs.getString(1));
-                System.out.println("rs.getDate(2)=" + rs.getDate(2));
-                sbor.setData_sbora(rs.getDate(2));
+                sbor.setId(rs.getInt(1));
+                sbor.setName(rs.getString(2));
+                System.out.println("rs.getDate(2)=" + rs.getDate(3));
+                sbor.setData_sbora(rs.getDate(3));
                 k++;
 
                 listSbor.add(sbor);
@@ -345,9 +346,10 @@ if (conn==null){
 
                 Sprotsmens sprotsmens = new Sprotsmens();
 
-                sprotsmens.setFio(rs.getString(1));
+                sprotsmens.setId(rs.getInt(1));
+                sprotsmens.setFio(rs.getString(2));
                 //System.out.println("rs.getDate(2)="+rs.getDate(2));
-                sprotsmens.setDate_birth(rs.getDate(2));
+                sprotsmens.setDate_birth(rs.getDate(3));
                 k++;
 
                 listSprotsmens.add(sprotsmens);
