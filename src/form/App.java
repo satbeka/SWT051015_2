@@ -36,7 +36,7 @@ public class App {
 
     display = new Display();
     shell = new Shell(display);
-    shell.setText("Menu Racshet ������ ��������");
+    shell.setText("Menu Racshet ?????? ????????");
     shell.setSize(600, 300);
 
     label = new Label(shell, SWT.CENTER);
@@ -50,7 +50,7 @@ public class App {
     fileMenuHeader.setMenu(fileMenu);
 
     fileSaveItem = new MenuItem(fileMenu, SWT.PUSH);
-    fileSaveItem.setText("&Change PWD ������� ������");
+    fileSaveItem.setText("&Change PWD ??????? ??????");
 
     fileExitItem = new MenuItem(fileMenu, SWT.PUSH);
     fileExitItem.setText("E&xit");

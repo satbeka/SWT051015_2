@@ -6,7 +6,7 @@
 <entry key="sign_checkTSP">false</entry>
 <entry key="urlJDBC">jdbc:oracle:thin:@ala-srv-db-tst1.tisr.kz:1521:TEST01</entry>
 
-    <entry key="urlSQLiteJDBC">jdbc:sqlite:C:/SQLiteDB/a.s3db</entry>
+    <entry key="urlSQLiteJDBC">jdbc:sqlite:C:/work/a.s3db</entry>
 
 <entry key="username">ercb</entry>
 <entry key="SQLselListSbor">SELECT id,name,data_sbora FROM sbor</entry>

@@ -1,5 +1,6 @@
 package form;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.layout.FillLayout;
@@ -111,11 +112,15 @@ public class TableOnForm {
         mItem3.setText(" Delete Test.");
 
 
+        TableEditor tableEditor=new TableEditor(table);
+        int i=tableEditor.getColumn();
+
+
+
         //Insert
         mItem1.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e) {
                 System.out.println("Add Test.");
-
 
 
             }
