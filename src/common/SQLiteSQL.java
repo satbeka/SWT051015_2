@@ -4,10 +4,13 @@ package common;
 public class SQLiteSQL {
 
     private static String SQLselListSbor = null;
+    private static String SQLinsSbor=null;
+    private static String SQLselMaxIdSbor=null;
+
     private static String SQLselListTrenirvka=null;
     private static String SQLselListUpragnenie=null;
     private static String SQLselLitogo=null;
-    private static String SQLinsSbor=null;
+
     private static String SQLupdSbor=null;
     private static String SQLdelSbor=null;
     private static String SQLinsSprotsmens=null;
@@ -23,6 +26,14 @@ public class SQLiteSQL {
             SQLinsSbor = PropertiesBuilder.getProperty("SQLinsSbor");
         }
         return SQLinsSbor;
+    }
+
+    public static String SQLselMaxIdSbor()
+    {
+        if (SQLselMaxIdSbor == null) {
+            SQLselMaxIdSbor = PropertiesBuilder.getProperty("SQLselMaxIdSbor");
+        }
+        return SQLselMaxIdSbor;
     }
 
     public static String SQLupdSbor()

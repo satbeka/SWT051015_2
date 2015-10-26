@@ -7,11 +7,13 @@ import common.SQLiteSQL;
 import model.Sbor;
 import model.Sprotsmens;
 import model.Upragnenie;
+import util.DataTransform;
 
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.*;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
@@ -274,7 +276,7 @@ if (conn==null){
 
                 Sbor sbor = new Sbor();
 
-                sbor.setId(rs.getInt(1));
+                sbor.setId(rs.getString(1));
                 sbor.setName(rs.getString(2));
                 System.out.println("rs.getDate(2)=" + rs.getDate(3));
                 sbor.setData_sbora(rs.getDate(3));
@@ -317,6 +319,127 @@ if (conn==null){
         return listSbor;
 
     }
+
+    public static String insSborSQLite(String[] arrV) {
+
+        String id="--";
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.SQLselMaxIdSbor();
+
+        System.out.println("SqlView ins max SQLite=" + SqlView);
+        if (conn==null){
+            id="connection not work";
+            return id;};
+
+        try {
+
+            Statement statement = conn.createStatement();
+            ResultSet rs=statement.executeQuery(SqlView);
+            System.out.println("   User Max SqlView.executeQ().......");
+            //conn.commit();
+
+            while (rs.next()) {
+               id=rs.getString(1);
+                System.out.println("id=="+id);
+            };
+
+            int id_=Integer.parseInt(id)+1;
+            id=String.valueOf(id_);
+            System.out.println("id max+1=="+id);
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        conn = SQLiteDB.connectDB();
+        SqlView = SQLiteSQL.getSQLinsSbor();
+
+        try {
+            conn.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("SqlView ins SQLite=" + SqlView);
+        if (conn==null){
+            id="connection not work";
+            return id;};
+
+        try {
+
+
+            Statement stmt = null;
+            stmt=conn.createStatement();
+
+            String replOld;
+            //String str;
+            replOld="?1";
+            SqlView=SqlView.replace(replOld, id);
+            replOld="?2";
+            SqlView=SqlView.replace(replOld, arrV[1]);
+
+            Date date= DataTransform.getStrToDate(arrV[2].toString());
+            //YYYY-MM-DD
+            //DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            DateFormat df = new SimpleDateFormat("YYYY-MM-DD");
+            replOld="?3";
+            SqlView=SqlView.replace(replOld, df.format(date));
+
+            System.out.println("SqlView="+SqlView);
+            //System.out.println("str="+str);
+
+            stmt.executeUpdate(SqlView);
+
+/*
+            PreparedStatement pStatement = conn.prepareStatement(SqlView);
+            pStatement.setString(1,id);
+            pStatement.setString(2,arrV[1]);
+            System.out.println("arrV[2].toString()="+arrV[2].toString());
+            Date date= DataTransform.getStrToDate(arrV[2].toString());
+            //YYYY-MM-DD
+            //DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            DateFormat df = new SimpleDateFormat("YYYY-MM-DD");
+            pStatement.setString(3, df.format(date));
+            System.out.println("df.format(date)="+df.format(date));
+
+            pStatement.executeUpdate(SqlView);
+            System.out.println("   User SqlView.executeQ().......");
+            pStatement.close();
+*/
+
+            conn.commit();
+
+            if (stmt != null) {
+                stmt.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return id;
+
+    }
+
+
 
     public static ArrayList<Sprotsmens> getSprotsmensFromSQLite() {
 

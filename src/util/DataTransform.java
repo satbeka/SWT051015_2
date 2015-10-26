@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -96,6 +97,38 @@ public class DataTransform {
 
         return engCod;
     }
+
+
+    public static ArrayList<String[]> getSbor(ArrayList<Sbor> sborArrayList) {
+
+        //"Sbori","name","data_sbora"
+        System.out.println("getSbor=" + sborArrayList);
+
+        int k = 0;
+        Sbor sbor;
+        String str;
+        int size=sborArrayList.size();
+        ArrayList<String[]> arrRez=new ArrayList();
+
+        for (int i = 0; i < size; i++) {
+            sbor=sborArrayList.get(i);
+            String[] arrV=new String[size];
+            arrV[0]=sbor.getId();
+            arrV[1]=sbor.getName();
+            arrV[2]=DataTransform.getDateToStr(sbor.getData_sbora());
+            System.out.println("arrV="+arrV);
+            arrRez.add(arrV);
+        }
+
+
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return arrRez;
+
+    }
+
 
 
 
@@ -239,4 +272,17 @@ public class DataTransform {
         return rez;
     }
 
+    public static Date getStrToDate(String dt) {
+        Date rez=null;
+        if (!dt.contains(".")){
+            System.out.println("date inccorect");
+            return rez;};
+        SimpleDateFormat dt1 = new SimpleDateFormat("dd.MM.yyyy");
+        try {
+            rez=dt1.parse(dt);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return rez;
+    }
 }

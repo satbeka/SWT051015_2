@@ -26,9 +26,9 @@ public class App {
 
   MenuItem fileMenuHeader, dictMenuHeader, nagrzkaMenuHeader, helpMenuHeader;
 
-  MenuItem fileExitItem, fileSaveItem, dictSprotsmensItem, dictSboriItem, dictUprgItem, 
-  nagrzkaF9Item,
-  helpGetHelpItem;
+  MenuItem fileExitItem, fileSaveItem, dictSprotsmensItem, dictSboriItem, dictUprgItem,
+          nagrzkaF9Item,
+          helpGetHelpItem;
 
   Label label;
 
@@ -55,7 +55,7 @@ public class App {
     fileExitItem = new MenuItem(fileMenu, SWT.PUSH);
     fileExitItem.setText("E&xit");
 
-    
+
     //dict
     dictMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
     dictMenuHeader.setText("&Dictinary");
@@ -65,13 +65,13 @@ public class App {
 
     dictSprotsmensItem = new MenuItem(dictMenu, SWT.PUSH);
     dictSprotsmensItem.setText("&Sprotsmens");
-    
+
     dictSboriItem = new MenuItem(dictMenu, SWT.PUSH);
     dictSboriItem.setText("&Sbori");
 
     dictUprgItem = new MenuItem(dictMenu, SWT.PUSH);
     dictUprgItem.setText("&Uprg");
-    
+
     //dict
 
 
@@ -85,7 +85,7 @@ public class App {
     nagrzkaF9Item = new MenuItem(nagrzkaMenu, SWT.PUSH);
     nagrzkaF9Item.setText("&nagrzk F9");
     //nagr
-    
+
     helpMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
     helpMenuHeader.setText("&Help");
 
@@ -145,8 +145,7 @@ public class App {
       System.out.println(event.detail);
       //label.setText(event.text);
 
-      ArrayList arrayList=new ArrayList();
-      arrayList= DataTransform.getSborCsv(
+      ArrayList<String[]> arrayListData= DataTransform.getSbor(
               UserData.getSborFromSQLite());
 
       /*
@@ -156,7 +155,7 @@ public class App {
       */
       TableOnForm tableOnForm=new TableOnForm();
       tableOnForm.setDisplay2(display);
-      tableOnForm.load(arrayList,"Sbori","id","name","data_sbora");
+      tableOnForm.load(arrayListData,"Sbori","id","name","data_sbora");
 
 
     }
