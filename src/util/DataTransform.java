@@ -2,10 +2,7 @@ package util;
 
 import common.OracleDB;
 import common.OracleSQL;
-import common.SQLiteDB;
-import common.SQLiteSQL;
 import model.Sbor;
-import model.Sprotsmens;
 import model.Upragnenie;
 
 import java.math.BigDecimal;

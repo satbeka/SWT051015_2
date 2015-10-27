@@ -5,12 +5,10 @@ import common.OracleSQL;
 import common.SQLiteDB;
 import common.SQLiteSQL;
 import model.Sbor;
-import model.Sprotsmens;
 import model.Upragnenie;
 import util.DataTransform;
 
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.text.DateFormat;
