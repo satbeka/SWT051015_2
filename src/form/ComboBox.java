@@ -1,7 +1,6 @@
 package form;
 import dboperation.UserData;
 import model.Sbor;
-import model.Upragnenie;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -11,7 +10,6 @@ import org.eclipse.swt.layout.GridLayout;
 
 import org.eclipse.swt.widgets.*;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -131,81 +129,6 @@ public class ComboBox {
         titleTrenik.setLayoutData(gridData);
         label.setVisible(false);
         titleTrenik.setVisible(false);
-
-
-
-
-        openUpragn = new Button (shell, SWT.PUSH);
-        gridData = new GridData(GridData.HORIZONTAL_ALIGN_FILL);
-        gridData.horizontalSpan = 3;
-        openUpragn.setLayoutData(gridData);
-        //openUpragn.setLocation(100, 100);
-        openUpragn.setText(" 3 Choose Upragnenia ");
-        openUpragn.setVisible(false);
-
-        // Create a dropdown Combo
-        Label labelUpragn=new Label(shell,SWT.NONE);
-        labelUpragn.setText("3 Choose Upragn: ");
-        //labelSbor.setLocation(1020,20);
-        final Combo comboUpragn = new Combo(shell, SWT.DROP_DOWN);
-
-        System.out.println("#2 iterator");
-        List<Upragnenie> listU=UserData.getUpragnFromSQLite();
-        Iterator<Upragnenie> iteratorU = listU.iterator();
-        int iU=0;
-        upragnItems=new String[listU.size()];
-        while (iteratorU.hasNext()) {
-            //System.out.println(iterator.next().getName());
-            upragnItems[iU]=iteratorU.next().getName();
-            iU++;
-        }
-        System.out.println(upragnItems[2]);
-        comboUpragn.setItems(upragnItems);
-
-        comboUpragn.addSelectionListener(new SelectionAdapter() {
-            public void widgetSelected(SelectionEvent event) {
-
-                System.out.println(" " + comboUpragn.getSelectionIndex());
-                comboUpagnChoose = comboUpragn.getItem(comboUpragn.getSelectionIndex());
-                System.out.println("comboUprgChoose=" + comboUpagnChoose);
-                if (!comboUpagnChoose.isEmpty()) {
-
-
-                }
-
-            }
-        });
-        comboUpragn.setVisible(false);
-        labelUpragn.setVisible(false);
-
-
-        openUpragn.addSelectionListener(new SelectionAdapter() {
-            public void widgetSelected(SelectionEvent e) {
-
-                if (titleTrenik.getText().isEmpty()) {
-                    MessageBox messageBox = new MessageBox(shell, SWT.ICON_WARNING | SWT.ABORT | SWT.RETRY | SWT.IGNORE);
-
-                    messageBox.setText("Warning");
-                    messageBox.setMessage(" Treninrk is empty! ");
-                    return;
-                }
-                comboUpragn.setVisible(true);
-
-                /*
-                final Shell dialog = new Shell(shell, SWT.DIALOG_TRIM);
-                dialog.setLayout(new GridLayout(3, false));
-
-                dialog.pack();
-                dialog.open();
-                */
-            }
-        });
-
-
-
-
-
-
 
 
         comboSbor.addSelectionListener(new SelectionAdapter() {

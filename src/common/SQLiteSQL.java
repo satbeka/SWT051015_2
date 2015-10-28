@@ -20,6 +20,57 @@ public class SQLiteSQL {
     private static String SQLselSprotsmens=null;
 
 
+    private static String SQLselListTWLTCSTATUS=null;
+    private static String SQLselMaxIdTWLTCSTATUS=null;
+    private static String SQLinsTWLTCSTATUS=null;
+    private static String SQLupdTWLTCSTATUS=null;
+    private static String SQLdelTWLTCSTATUS=null;
+
+
+    public static String getSQLselListTWLTCSTATUS()
+    {
+        if (SQLselListTWLTCSTATUS == null) {
+            SQLselListTWLTCSTATUS = PropertiesBuilder.getProperty("SQLselListTWLTCSTATUS");
+        }
+        return SQLselListTWLTCSTATUS;
+    }
+
+    public static String SQLselMaxIdTWLTCSTATUS()
+    {
+        if (SQLselMaxIdTWLTCSTATUS == null) {
+            SQLselMaxIdTWLTCSTATUS = PropertiesBuilder.getProperty("SQLselMaxIdTWLTCSTATUS");
+        }
+        return SQLselMaxIdTWLTCSTATUS;
+    }
+
+    public static String SQLinsTWLTCSTATUS()
+    {
+        if (SQLinsTWLTCSTATUS == null) {
+            SQLinsTWLTCSTATUS = PropertiesBuilder.getProperty("SQLinsTWLTCSTATUS");
+        }
+        return SQLinsTWLTCSTATUS;
+    }
+
+    public static String SQLupdTWLTCSTATUS()
+    {
+        if (SQLupdTWLTCSTATUS == null) {
+            SQLupdTWLTCSTATUS = PropertiesBuilder.getProperty("SQLupdTWLTCSTATUS");
+        }
+        return SQLupdTWLTCSTATUS;
+    }
+
+    public static String SQLdelTWLTCSTATUS()
+    {
+        if (SQLdelTWLTCSTATUS == null) {
+            SQLdelTWLTCSTATUS = PropertiesBuilder.getProperty("SQLdelTWLTCSTATUS");
+        }
+        return SQLdelTWLTCSTATUS;
+    }
+
+
+
+
+
     public static String getSQLinsSbor()
     {
         if (SQLinsSbor == null) {

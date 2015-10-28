@@ -27,8 +27,13 @@ public class App {
   MenuItem fileMenuHeader, dictMenuHeader, nagrzkaMenuHeader, helpMenuHeader;
 
   MenuItem fileExitItem, fileSaveItem, dictSprotsmensItem, dictSboriItem, dictUprgItem,
+          dictTWLTCSTATUSItem,
+
+
+
           nagrzkaF9Item,
           helpGetHelpItem;
+
 
   Label label;
 
@@ -63,14 +68,15 @@ public class App {
     dictMenu = new Menu(shell, SWT.DROP_DOWN);
     dictMenuHeader.setMenu(dictMenu);
 
-    dictSprotsmensItem = new MenuItem(dictMenu, SWT.PUSH);
-    dictSprotsmensItem.setText("&Sprotsmens");
-
     dictSboriItem = new MenuItem(dictMenu, SWT.PUSH);
     dictSboriItem.setText("&Sbori");
 
-    dictUprgItem = new MenuItem(dictMenu, SWT.PUSH);
-    dictUprgItem.setText("&Uprg");
+
+    dictTWLTCSTATUSItem = new MenuItem(dictMenu, SWT.PUSH);
+    dictTWLTCSTATUSItem.setText("&TWLTCSTATUS");
+
+
+
 
     //dict
 
@@ -99,8 +105,11 @@ public class App {
     fileSaveItem.addSelectionListener(new fileSaveItemListener());
     helpGetHelpItem.addSelectionListener(new helpGetHelpItemListener());
     dictSboriItem.addSelectionListener(new dictSboriItemiListener());
-    dictSprotsmensItem.addSelectionListener(new dictSprotsmensItemListener());
-    dictUprgItem.addSelectionListener(new dictUprgItemListener());
+
+    dictTWLTCSTATUSItem.addSelectionListener(new dictTWLTCSTATUSItemListener());
+
+
+
     nagrzkaF9Item.addSelectionListener(new nagrzkaF9ItemListener());
 
     shell.setMenuBar(menuBar);
@@ -155,7 +164,7 @@ public class App {
       */
       TableOnForm tableOnForm=new TableOnForm();
       tableOnForm.setDisplay2(display);
-      tableOnForm.load(arrayListData,"Sbori","id","name","data_sbora");
+      tableOnForm.load(arrayListData, "Sbori", "id", "name", "data_sbora");
 
 
     }
@@ -164,36 +173,13 @@ public class App {
       label.setText("dictSboriItemiListener2222");
     }
   }
-  class dictSprotsmensItemListener implements SelectionListener {
+
+  class dictTWLTCSTATUSItemListener implements SelectionListener {
     public void widgetSelected(SelectionEvent event) {
-      label.setText("dictSprotsmensItemListener");
-      ArrayList arrayList=new ArrayList();
-      /*
-      arrayList.add("Drogba;18.02.2010");
-      arrayList.add("Snalone;08.08.1055");
-      arrayList.add("Anarbai Champion Bee Best;11.11.1001");
-      arrayList.add("Anarbai Champion Bee Best;11.11.1002");
-      arrayList.add("Anarbai Champion Bee Best;11.11.1003");
-      arrayList.add("Anarbai Champion Bee Best;11.11.1004");
-      */
-      arrayList= DataTransform.getSprotsmensCsv(
-              UserData.getSprotsmensFromSQLite());
-      TableOnForm tableOnForm=new TableOnForm();
-      tableOnForm.setDisplay2(display);
-      tableOnForm.load(arrayList, "Sprotsmens", "id", "fio", "data_birth");
+      label.setText("TWLTCSTATUS");
 
-    }
-
-    public void widgetDefaultSelected(SelectionEvent event) {
-      label.setText("Saved");
-    }
-  }
-  class dictUprgItemListener implements SelectionListener {
-    public void widgetSelected(SelectionEvent event) {
-      label.setText("Uprg");
-
-      ArrayList arrayList=new ArrayList();
-      arrayList=UserData.getUpragnFromSQLite();
+      ArrayList<String[]> arrayListData= DataTransform.getTWLTCSTATUS(
+      UserData.getTWLTCSTATUSFromSQLite());
       /*
       arrayList.add("Beg 100;Beg");
       arrayList.add("Beg 800;Beg");
@@ -204,13 +190,14 @@ public class App {
       */
       TableOnForm tableOnForm=new TableOnForm();
       tableOnForm.setDisplay2(display);
-      tableOnForm.load(arrayList, "Uprgs","id", "upragnenei ", "group_upragn ");
+      tableOnForm.load(arrayListData, "TWLTCSTATUS","id", "vTCSTATUS ", "vTCSTATUS_RU ");
     }
 
     public void widgetDefaultSelected(SelectionEvent event) {
       label.setText("Saved");
     }
   }
+
 
   class nagrzkaF9ItemListener implements SelectionListener {
     public void widgetSelected(SelectionEvent event) {

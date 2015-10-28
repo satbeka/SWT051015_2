@@ -1,9 +1,7 @@
 package util;
 
-import common.OracleDB;
-import common.OracleSQL;
 import model.Sbor;
-import model.Upragnenie;
+import model.TWLTCSTATUS;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -20,7 +18,7 @@ public class DataTransform {
 
 
     private List<Sbor> sbors;
-    private List<Upragnenie> upragnenies;
+
     private Date dateSbor;
     private String idTrenirvki;
     private Time timeUpragnenie;
@@ -96,6 +94,40 @@ public class DataTransform {
     }
 
 
+    public static ArrayList<String[]> getTWLTCSTATUS(ArrayList<TWLTCSTATUS> arrayList) {
+
+        //"Sbori","name","data_sbora"
+        System.out.println("getgetTWLTCSTATUS=" + arrayList);
+
+        int k = 0;
+        TWLTCSTATUS twltcstatus;
+        String str;
+        int size=arrayList.size();
+        ArrayList<String[]> arrRez=new ArrayList();
+
+        for (int i = 0; i < size; i++) {
+            twltcstatus=arrayList.get(i);
+            String[] arrV=new String[size];
+            arrV[0]=twltcstatus.getId();
+            arrV[1]=twltcstatus.getvTCSTATUS();
+            arrV[2]=twltcstatus.getvTCSTATUS_RU();
+            System.out.println("arrV="+arrV);
+            arrRez.add(arrV);
+        }
+
+
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return arrRez;
+
+    }
+
+
+
+
+
     public static ArrayList<String[]> getSbor(ArrayList<Sbor> sborArrayList) {
 
         //"Sbori","name","data_sbora"
@@ -127,8 +159,6 @@ public class DataTransform {
     }
 
 
-
-
     public static ArrayList<String> getSborCsv(ArrayList<Sbor> sborArrayList) {
 
         ArrayList<String> arrRez=new ArrayList<>();
@@ -154,105 +184,6 @@ public class DataTransform {
         return arrRez;
 
     }
-
-    public static ArrayList<String> getSprotsmensCsv(ArrayList<Sprotsmens> sportsmensArrayList) {
-
-        ArrayList<String> arrRez=new ArrayList<>();
-        //"Sbori","name","data_sbora"
-        System.out.println("getSprotsmensCsv=" + sportsmensArrayList);
-
-        int k = 0;
-        Sprotsmens sportsmens;
-        String str;
-
-        for (int i = 0; i < sportsmensArrayList.size(); i++) {
-            sportsmens=sportsmensArrayList.get(i);
-            str=sportsmens.getId()+";"+sportsmens.getFio()+";"+DataTransform.getDateToStr(sportsmens.getDate_birth());
-            System.out.println("str sportsmens="+str);
-            arrRez.add(str);
-        }
-
-
-
-        System.out.println("-----------");
-        //System.out.println(listTisr_non_market);
-
-        return arrRez;
-
-    }
-
-    public static ArrayList<Upragnenie> getUpragnFromOracle() {
-
-        ArrayList<Upragnenie> listUprg = new ArrayList<Upragnenie>();
-
-        String SqlView = OracleSQL.getSQLselListUpragnenie();
-
-
-        System.out.println("SqlView Up=" + SqlView);
-
-        Driver myDriver = new oracle.jdbc.driver.OracleDriver();
-        String uRL = OracleDB.getSystemDb();
-        String uSER = OracleDB.getDbUsername();
-        String pASS = OracleDB.getDbPwd();
-
-        try {
-            DriverManager.registerDriver(myDriver);
-
-            Connection conn = DriverManager.getConnection(uRL, uSER, pASS);
-
-            PreparedStatement pS = conn.prepareStatement(SqlView);
-            //pS.executeUpdate();
-            ResultSet rs = pS.executeQuery(SqlView);
-            System.out.println("   User SqlView.executeQ().......");
-            conn.commit();
-            int k = 0;
-
-            while (rs.next()) {
-
-                Upragnenie upragnenie = new Upragnenie();
-
-                upragnenie.setName(rs.getString(1));
-                upragnenie.setShort_name(rs.getString(2));
-                k++;
-
-                listUprg.add(upragnenie);
-
-            };
-
-/*
-            String dt1Str;
-            String dt2Str;
-            //if (dt1==null){dt1Str="01/01/1000";}
-            System.out.println(dt1);
-            SimpleDateFormat dtF = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            dt1Str = dtF.format(dt1);
-            System.out.println("222 dt1Str=" + dt1Str);
-            //Date dt2 = new Date();
-            //dt2.setTime(dt1.getTime() + 1 * 24 * 60 * 60 * 1000);
-            dt2Str = dtF.format(dt2);
-            System.out.println("dt2str=" + dt2Str);
-*/
-
-            if (pS != null) {
-                pS.close();
-            }
-
-            if (conn != null) {
-                conn.close();
-            }
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("-----------");
-        //System.out.println(listTisr_non_market);
-
-        return listUprg;
-
-    }
-
 
 
     public void setDate(String date) {
