@@ -252,7 +252,7 @@ public class TableOnForm {
                                         //text.setText("888");
 
                                     }
-                                    arrV[0]= UserData.insSborSQLite(arrV);
+                                    arrV[0]= UserData.insTWLTCSTATUS(arrV);
 
                                     tableItemEdit.setText(arrV);
 

@@ -1,22 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<comment>---</comment>
-<entry key="password">ercb</entry>
-<entry key="sign_checkTSP">false</entry>
-<entry key="urlJDBC">jdbc:oracle:thin:@ala-srv-db-tst1.tisr.kz:1521:TEST01</entry>
+    <comment>---</comment>
+    <entry key="password">ercb</entry>
+    <entry key="sign_checkTSP">false</entry>
+    <entry key="urlJDBC">jdbc:oracle:thin:@ala-srv-db-tst1.tisr.kz:1521:TEST01</entry>
 
-    <entry key="urlSQLiteJDBC">jdbc:sqlite:C:/work/a.s3db</entry>
+    <entry key="urlSQLiteJDBC">jdbc:sqlite:C:/work/wl2015f_sqlite.s3db</entry>
 
-<entry key="username">ercb</entry>
-<entry key="SQLselListSbor">SELECT id,name,data_sbora FROM sbor</entry>
+    <entry key="username">ercb</entry>    
     <entry key="SQLselSprotsmens">SELECT id,fio,date_birth FROM sportsmens</entry>
-<entry key="SQLselListUpragnenie">select id,name,short_name from UPRAGNENIE</entry>
+    <entry key="SQLselListUpragnenie">select id,name,short_name from UPRAGNENIE</entry>
 
-    <entry key="SQLinsSbor">insert into sbor(name,short_name,data_sbora) values (?,' 444 ',?)</entry>
-    <entry key="SQLupdSbor">update sbor set name='?',data_sbora=to_date('?') where id=?</entry>
+	<entry key="SQLselListSbor">SELECT id,name,data_sbora FROM sbor</entry>
+    <entry key="SQLinsSbor">insert into sbor(id,name,data_sbora,short_name) values (?1,'?2',date('?3'),'00')</entry>
+	<entry key="SQLselMaxIdSbor">SELECT max(id) FROM sbor</entry>
+    <entry key="SQLupdSbor">update sbor set name='?',data_sbora=to_date('?','dd.mm.yyyy') where id=?</entry>
     <entry key="SQLdelSbor">delete sbor where id=?</entry>
 
 
+<entry key="SQLselListTWLTCSTATUS">select t.ID, t.vTCSTATUS, t.vTCSTATUS_RU from TWLTCSTATUS t</entry>
+<entry key="SQLinsTWLTCSTATUS">insert into sbor(id,name,data_sbora,short_name) values (?1,'?2',date('?3'),'00')</entry>
+	<entry key="SQLselMaxIdTWLTCSTATUS">SELECT max(id) FROM sbor</entry>
+    <entry key="SQLupdTWLTCSTATUS">update sbor set name='?',data_sbora=to_date('?','dd.mm.yyyy') where id=?</entry>
+    <entry key="SQLdelTWLTCSTATUS">delete sbor where id=?</entry>
+
+
+
+	
+	
 
 </properties>
