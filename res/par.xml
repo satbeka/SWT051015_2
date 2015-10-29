@@ -25,7 +25,17 @@
     <entry key="SQLupdTWLTCSTATUS">update TWLTCSTATUS set vTCSTATUS='?1',vTCSTATUS_RU='?2' where id=?3</entry>
     <entry key="SQLdelTWLTCSTATUS">delete from TWLTCSTATUS where id=?1</entry>
 
+<entry key="SQLselListTTCPERSONAL">select t.ID, t.vSURNAME, t.vFIRSTNAME, t.vMIDDLENAME from TTCPERSONAL t</entry>
+<entry key="SQLinsTTCPERSONAL">insert into TTCPERSONAL(id,vSURNAME,vFIRSTNAME,vMIDDLENAME,) values (?1,'?2','?3','?4')</entry>
+	<entry key="SQLselMaxIdTTCPERSONAL">SELECT max(id) FROM TTCPERSONAL</entry>
+    <entry key="SQLupdTTCPERSONAL">update TTCPERSONAL set vSURNAME='?1',vFIRSTNAME='?2',vMIDDLENAME='?3' where id=?4</entry>
+    <entry key="SQLdelTTCPERSONAL">delete from TTCPERSONAL where id=?1</entry>
 
+<entry key="SQLselListTTCTEAMS">select t.ID, t.vNAME, t.vTEAMDESC from TTCTEAMS t</entry>
+<entry key="SQLinsTTCTEAMS">insert into TTCTEAMS(id,vNAME,vTEAMDESC) values (?1,'?2','?3')</entry>
+	<entry key="SQLselMaxIdTTCTEAMS">SELECT max(id) FROM TTCTEAMS</entry>
+    <entry key="SQLupdTTCTEAMS">update TTCTEAMS set vNAME='?1',vTEAMDESC='?2' where id=?3</entry>
+    <entry key="SQLdelTTCTEAMS">delete from TTCTEAMS where id=?1</entry>
 
 	
 	
