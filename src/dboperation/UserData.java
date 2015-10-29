@@ -423,6 +423,61 @@ public class UserData  {
 
     }
 
+    public static String delTWLTCSTATUS(String[] arrV) {
+
+        String id=arrV[0];
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.SQLdelTWLTCSTATUS();
+
+        try {
+            conn.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("SqlView del SQLite=" + SqlView);
+        if (conn==null){
+            id="connection not work";
+            return id;};
+
+        try {
+
+
+            Statement stmt = null;
+            stmt=conn.createStatement();
+
+            String replOld;
+            //String str;
+            replOld="?1";
+            SqlView=SqlView.replace(replOld, id);
+
+            System.out.println("SqlView="+SqlView);
+            //System.out.println("str="+str);
+
+            stmt.executeUpdate(SqlView);
+
+            conn.commit();
+
+            if (stmt != null) {
+                stmt.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return id;
+
+    }
 
 
     public static ArrayList<Sbor> getSborFromSQLite() {
