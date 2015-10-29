@@ -20,10 +20,10 @@
 
 
 <entry key="SQLselListTWLTCSTATUS">select t.ID, t.vTCSTATUS, t.vTCSTATUS_RU from TWLTCSTATUS t</entry>
-<entry key="SQLinsTWLTCSTATUS">insert into sbor(id,name,data_sbora,short_name) values (?1,'?2',date('?3'),'00')</entry>
-	<entry key="SQLselMaxIdTWLTCSTATUS">SELECT max(id) FROM sbor</entry>
-    <entry key="SQLupdTWLTCSTATUS">update sbor set name='?',data_sbora=to_date('?','dd.mm.yyyy') where id=?</entry>
-    <entry key="SQLdelTWLTCSTATUS">delete sbor where id=?</entry>
+<entry key="SQLinsTWLTCSTATUS">insert into TWLTCSTATUS(id,vTCSTATUS,vTCSTATUS) values (?1,'?2','?3')</entry>
+	<entry key="SQLselMaxIdTWLTCSTATUS">SELECT max(id) FROM TWLTCSTATUS</entry>
+    <entry key="SQLupdTWLTCSTATUS">update TWLTCSTATUS set vTCSTATUS='?1',vTCSTATUS_RU='?2' where id=?3</entry>
+    <entry key="SQLdelTWLTCSTATUS">delete from TWLTCSTATUS where id=?1</entry>
 
 
 
