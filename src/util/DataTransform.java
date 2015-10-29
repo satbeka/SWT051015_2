@@ -1,6 +1,7 @@
 package util;
 
 import model.Sbor;
+import model.TTCPERSONAL;
 import model.TWLTCSTATUS;
 
 import java.math.BigDecimal;
@@ -124,8 +125,37 @@ public class DataTransform {
 
     }
 
+    public static ArrayList<String[]> getTTCPERSONAL(ArrayList<TTCPERSONAL> arrayList) {
+
+        //"Sbori","name","data_sbora"
+        System.out.println("getgetTTCPERSONAL=" + arrayList);
+
+        int k = 0;
+        TTCPERSONAL tTCPERSONAL;
+        String str;
+        int size=arrayList.size();
+        ArrayList<String[]> arrRez=new ArrayList();
+
+        for (int i = 0; i < size; i++) {
+            tTCPERSONAL=arrayList.get(i);
+            String[] arrV=new String[size];
+            arrV[0]=tTCPERSONAL.getId();
+            arrV[1]=tTCPERSONAL.getvFIRSTNAME();
+            arrV[2]=tTCPERSONAL.getvMIDDLENAME();
+            arrV[3]=tTCPERSONAL.getvSURNAME();
+
+            System.out.println("arrV="+arrV);
+            arrRez.add(arrV);
+        }
 
 
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return arrRez;
+
+    }
 
 
     public static ArrayList<String[]> getSbor(ArrayList<Sbor> sborArrayList) {

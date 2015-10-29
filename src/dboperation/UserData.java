@@ -5,6 +5,7 @@ import common.OracleSQL;
 import common.SQLiteDB;
 import common.SQLiteSQL;
 import model.Sbor;
+import model.TTCPERSONAL;
 import model.TWLTCSTATUS;
 import util.DataTransform;
 
@@ -452,6 +453,235 @@ public class UserData  {
             replOld="?1";
             SqlView=SqlView.replace(replOld, id);
 
+            System.out.println("SqlView=" + SqlView);
+            //System.out.println("str="+str);
+
+            stmt.executeUpdate(SqlView);
+
+            conn.commit();
+
+            if (stmt != null) {
+                stmt.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return id;
+
+    }
+
+    public static ArrayList<TTCPERSONAL> getTTCPERSONALFromSQLite() {
+
+        ArrayList<TTCPERSONAL> listTTCPERSONAL = new ArrayList<TTCPERSONAL>();
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.getSQLselListTTCPERSONAL();
+
+        System.out.println("SqlView SQLite=" + SqlView);
+        if (conn==null){
+            TTCPERSONAL tTCPERSONAL = new TTCPERSONAL();
+            tTCPERSONAL.setId("connection not work");
+            listTTCPERSONAL.add(tTCPERSONAL);
+            return listTTCPERSONAL;};
+
+        try {
+
+            Statement statement = conn.createStatement();
+
+
+            ResultSet rs=statement.executeQuery(SqlView);
+            System.out.println("   User SqlView.executeQ().......");
+            //conn.commit();
+            int k = 0;
+
+            while (rs.next()) {
+
+                TTCPERSONAL tTCPERSONAL = new TTCPERSONAL ();
+
+                tTCPERSONAL.setId(rs.getString(1));
+                tTCPERSONAL.setvFIRSTNAME(rs.getString(3));
+                System.out.println("tTCPERSONAL rs.get(2)=" + rs.getString(2));
+                tTCPERSONAL.setvMIDDLENAME(rs.getString(4));
+                tTCPERSONAL.setvSURNAME(rs.getString(2));
+                k++;
+
+                listTTCPERSONAL.add(tTCPERSONAL);
+
+            };
+
+
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return listTTCPERSONAL;
+
+    }
+
+
+
+    public static String insTTCPERSONAL(String[] arrV) {
+
+        String id="--";
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.SQLselMaxIdTTCPERSONAL();
+
+        System.out.println("SqlView ins max SQLite=" + SqlView);
+        if (conn==null){
+            id="connection not work";
+            return id;};
+
+        try {
+
+            Statement statement = conn.createStatement();
+            ResultSet rs=statement.executeQuery(SqlView);
+            System.out.println("   User Max SqlView.executeQ().......");
+            //conn.commit();
+
+            while (rs.next()) {
+                id=rs.getString(1);
+                System.out.println("id=="+id);
+            };
+
+            int id_=Integer.parseInt(id)+1;
+            id=String.valueOf(id_);
+            System.out.println("id max+1=="+id);
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        conn = SQLiteDB.connectDB();
+        SqlView = SQLiteSQL.SQLinsTTCPERSONAL();
+
+        try {
+            conn.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("SqlView ins SQLite=" + SqlView);
+        if (conn==null){
+            id="connection not work";
+            return id;};
+
+        try {
+
+
+            Statement stmt = null;
+            stmt=conn.createStatement();
+
+            String replOld;
+            //String str;
+            replOld="?1";
+            SqlView=SqlView.replace(replOld, id);
+            replOld="?2";
+            SqlView=SqlView.replace(replOld, arrV[1]);
+
+            replOld="?3";
+            SqlView=SqlView.replace(replOld, arrV[2]);
+
+            replOld="?4";
+            SqlView=SqlView.replace(replOld, arrV[3]);
+
+            System.out.println("SqlView="+SqlView);
+            //System.out.println("str="+str);
+
+            stmt.executeUpdate(SqlView);
+
+
+            conn.commit();
+
+            if (stmt != null) {
+                stmt.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return id;
+
+    }
+
+    public static String updTTCPERSONAL(String[] arrV) {
+
+        String id=arrV[0];
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.SQLupdTTCPERSONAL();
+
+        try {
+            conn.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("SqlView upd SQLite=" + SqlView);
+        if (conn==null){
+            id="connection not work";
+            return id;};
+
+        try {
+
+
+            Statement stmt = null;
+            stmt=conn.createStatement();
+
+            String replOld;
+            //String str;
+            replOld="?4";
+            SqlView=SqlView.replace(replOld, id);
+            replOld="?1";
+            SqlView=SqlView.replace(replOld, arrV[1]);
+
+            replOld="?2";
+            SqlView=SqlView.replace(replOld, arrV[2]);
+
+            replOld="?3";
+            SqlView=SqlView.replace(replOld, arrV[3]);
+
             System.out.println("SqlView="+SqlView);
             //System.out.println("str="+str);
 
@@ -478,6 +708,66 @@ public class UserData  {
         return id;
 
     }
+
+    public static String delTTCPERSONAL(String[] arrV) {
+
+        String id=arrV[0];
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.SQLdelTTCPERSONAL();
+
+        try {
+            conn.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("SqlView del SQLite=" + SqlView);
+        if (conn==null){
+            id="connection not work";
+            return id;};
+
+        try {
+
+
+            Statement stmt = null;
+            stmt=conn.createStatement();
+
+            String replOld;
+            //String str;
+            replOld="?1";
+            SqlView=SqlView.replace(replOld, id);
+
+            System.out.println("SqlView="+SqlView);
+            //System.out.println("str="+str);
+
+            stmt.executeUpdate(SqlView);
+
+            conn.commit();
+
+            if (stmt != null) {
+                stmt.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return id;
+
+    }
+
+
+
+
 
 
     public static ArrayList<Sbor> getSborFromSQLite() {

@@ -26,6 +26,11 @@ public class SQLiteSQL {
     private static String SQLupdTWLTCSTATUS=null;
     private static String SQLdelTWLTCSTATUS=null;
 
+    private static String SQLselListTTCPERSONAL=null;
+    private static String SQLselMaxIdTTCPERSONAL=null;
+    private static String SQLinsTTCPERSONAL=null;
+    private static String SQLupdTTCPERSONAL=null;
+    private static String SQLdelTTCPERSONAL=null;
 
     public static String getSQLselListTWLTCSTATUS()
     {
@@ -67,6 +72,46 @@ public class SQLiteSQL {
         return SQLdelTWLTCSTATUS;
     }
 
+
+    public static String getSQLselListTTCPERSONAL()
+    {
+        if (SQLselListTTCPERSONAL == null) {
+            SQLselListTTCPERSONAL = PropertiesBuilder.getProperty("SQLselListTTCPERSONAL");
+        }
+        return SQLselListTTCPERSONAL;
+    }
+
+    public static String SQLselMaxIdTTCPERSONAL()
+    {
+        if (SQLselMaxIdTTCPERSONAL == null) {
+            SQLselMaxIdTTCPERSONAL = PropertiesBuilder.getProperty("SQLselMaxIdTTCPERSONAL");
+        }
+        return SQLselMaxIdTTCPERSONAL;
+    }
+
+    public static String SQLinsTTCPERSONAL()
+    {
+        if (SQLinsTTCPERSONAL == null) {
+            SQLinsTTCPERSONAL = PropertiesBuilder.getProperty("SQLinsTTCPERSONAL");
+        }
+        return SQLinsTTCPERSONAL;
+    }
+
+    public static String SQLupdTTCPERSONAL()
+    {
+        if (SQLupdTTCPERSONAL == null) {
+            SQLupdTTCPERSONAL = PropertiesBuilder.getProperty("SQLupdTTCPERSONAL");
+        }
+        return SQLupdTTCPERSONAL;
+    }
+
+    public static String SQLdelTTCPERSONAL()
+    {
+        if (SQLdelTTCPERSONAL == null) {
+            SQLdelTTCPERSONAL = PropertiesBuilder.getProperty("SQLdelTTCPERSONAL");
+        }
+        return SQLdelTTCPERSONAL;
+    }
 
 
 

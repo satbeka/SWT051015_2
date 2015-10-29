@@ -28,7 +28,7 @@ public class App {
 
   MenuItem fileExitItem, fileSaveItem, dictSprotsmensItem, dictSboriItem, dictUprgItem,
           dictTWLTCSTATUSItem,
-
+          dictTTCPERSONALItem,
 
 
           nagrzkaF9Item,
@@ -75,8 +75,8 @@ public class App {
     dictTWLTCSTATUSItem = new MenuItem(dictMenu, SWT.PUSH);
     dictTWLTCSTATUSItem.setText("&TWLTCSTATUS");
 
-
-
+    dictTTCPERSONALItem = new MenuItem(dictMenu, SWT.PUSH);
+    dictTTCPERSONALItem.setText("&TTCPERSONAL");
 
     //dict
 
@@ -108,7 +108,7 @@ public class App {
 
     dictTWLTCSTATUSItem.addSelectionListener(new dictTWLTCSTATUSItemListener());
 
-
+    dictTTCPERSONALItem.addSelectionListener(new dictTTCPERSONALItemListener());
 
     nagrzkaF9Item.addSelectionListener(new nagrzkaF9ItemListener());
 
@@ -179,7 +179,7 @@ public class App {
       label.setText("TWLTCSTATUS");
 
       ArrayList<String[]> arrayListData= DataTransform.getTWLTCSTATUS(
-      UserData.getTWLTCSTATUSFromSQLite());
+              UserData.getTWLTCSTATUSFromSQLite());
       /*
       arrayList.add("Beg 100;Beg");
       arrayList.add("Beg 800;Beg");
@@ -191,6 +191,31 @@ public class App {
       TableOnForm tableOnForm=new TableOnForm();
       tableOnForm.setDisplay2(display);
       tableOnForm.load(arrayListData, "TWLTCSTATUS","id", "vTCSTATUS ", "vTCSTATUS_RU ");
+    }
+
+    public void widgetDefaultSelected(SelectionEvent event) {
+      label.setText("Saved");
+    }
+  }
+
+  class dictTTCPERSONALItemListener implements SelectionListener {
+    public void widgetSelected(SelectionEvent event) {
+      label.setText("TTCPERSONAL");
+
+      ArrayList<String[]> arrayListData= DataTransform.getTTCPERSONAL(
+              UserData.getTTCPERSONALFromSQLite());
+      /*
+      arrayList.add("Beg 100;Beg");
+      arrayList.add("Beg 800;Beg");
+      arrayList.add("Skakalka;CPY");
+      arrayList.add("Razminka;OFP");
+      arrayList.add("Razminka;CPY");
+      arrayList.add("Rabota v parax;CTTM");
+      */
+      TableOnForm tableOnForm=new TableOnForm();
+      tableOnForm.setDisplay2(display);
+      tableOnForm.load(arrayListData, "TTCPERSONAL","id",
+              "vTCSTATUS ", "vTCSTATUS_RU ");
     }
 
     public void widgetDefaultSelected(SelectionEvent event) {
