@@ -26,7 +26,7 @@
     <entry key="SQLdelTWLTCSTATUS">delete from TWLTCSTATUS where id=?1</entry>
 
 <entry key="SQLselListTTCPERSONAL">select t.ID, t.vSURNAME, t.vFIRSTNAME, t.vMIDDLENAME from TTCPERSONAL t</entry>
-<entry key="SQLinsTTCPERSONAL">insert into TTCPERSONAL(id,vSURNAME,vFIRSTNAME,vMIDDLENAME,) values (?1,'?2','?3','?4')</entry>
+<entry key="SQLinsTTCPERSONAL">insert into TTCPERSONAL(id,vSURNAME,vFIRSTNAME,vMIDDLENAME) values (?1,'?2','?3','?4')</entry>
 	<entry key="SQLselMaxIdTTCPERSONAL">SELECT max(id) FROM TTCPERSONAL</entry>
     <entry key="SQLupdTTCPERSONAL">update TTCPERSONAL set vSURNAME='?1',vFIRSTNAME='?2',vMIDDLENAME='?3' where id=?4</entry>
     <entry key="SQLdelTTCPERSONAL">delete from TTCPERSONAL where id=?1</entry>

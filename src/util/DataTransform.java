@@ -2,6 +2,7 @@ package util;
 
 import model.Sbor;
 import model.TTCPERSONAL;
+import model.TWLMVALUES;
 import model.TWLTCSTATUS;
 
 import java.math.BigDecimal;
@@ -156,6 +157,50 @@ public class DataTransform {
         return arrRez;
 
     }
+
+    public static ArrayList<String[]> getTWLMVALUES(ArrayList<TWLMVALUES> arrayList) {
+
+        //"Sbori","name","data_sbora"
+        System.out.println("getgetTWLMVALUES=" + arrayList);
+
+        int k = 0;
+        TWLMVALUES tTWLMVALUES;
+        String str;
+        int size=arrayList.size();
+        ArrayList<String[]> arrRez=new ArrayList();
+
+        for (int i = 0; i < size; i++) {
+            tTWLMVALUES=arrayList.get(i);
+            String[] arrV=new String[size];
+            arrV[0]=tTWLMVALUES.getId();
+            arrV[1]=tTWLMVALUES.getvMPULSEP10S_b();
+            arrV[2]=tTWLMVALUES.getvTCAMPID();
+            arrV[3]=tTWLMVALUES.getvTCSID();
+            arrV[4]=tTWLMVALUES.getvTCAMPID();
+            arrV[5]=tTWLMVALUES.getvTCTID();
+            arrV[6]=tTWLMVALUES.getvTRAININGDATE();
+            arrV[7]=tTWLMVALUES.getvTRAININGDUR_V();
+            arrV[8]=tTWLMVALUES.getvTRAININGID();
+            arrV[9]=tTWLMVALUES.getvTTSEQUENCE();
+
+
+
+
+
+            System.out.println("arrV="+arrV);
+            arrRez.add(arrV);
+        }
+
+
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return arrRez;
+
+    }
+
+
 
 
     public static ArrayList<String[]> getSbor(ArrayList<Sbor> sborArrayList) {

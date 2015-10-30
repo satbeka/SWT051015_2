@@ -397,7 +397,7 @@ public class UserData  {
             replOld="?2";
             SqlView=SqlView.replace(replOld, arrV[2]);
 
-            System.out.println("SqlView="+SqlView);
+            System.out.println("SqlView=" + SqlView);
             //System.out.println("str="+str);
 
             stmt.executeUpdate(SqlView);
@@ -765,6 +765,229 @@ public class UserData  {
 
     }
 
+
+
+    public static String insTWLMVALUES(String[] arrV) {
+
+        String id="--";
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.SQLselMaxIdTWLMVALUES();
+
+        System.out.println("SqlView ins max SQLite=" + SqlView);
+        if (conn==null){
+            id="connection not work";
+            return id;};
+
+        try {
+
+            Statement statement = conn.createStatement();
+            ResultSet rs=statement.executeQuery(SqlView);
+            System.out.println("   User Max SqlView.executeQ().......");
+            //conn.commit();
+
+            while (rs.next()) {
+                id=rs.getString(1);
+                System.out.println("id=="+id);
+            };
+
+            int id_=Integer.parseInt(id)+1;
+            id=String.valueOf(id_);
+            System.out.println("id max+1=="+id);
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        conn = SQLiteDB.connectDB();
+        SqlView = SQLiteSQL.SQLinsTWLMVALUES();
+
+        try {
+            conn.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("SqlView ins SQLite=" + SqlView);
+        if (conn==null){
+            id="connection not work";
+            return id;};
+
+        try {
+
+
+            Statement stmt = null;
+            stmt=conn.createStatement();
+
+            String replOld;
+            //String str;
+            replOld="?1";
+            SqlView=SqlView.replace(replOld, id);
+            replOld="?2";
+            SqlView=SqlView.replace(replOld, arrV[1]);
+
+            replOld="?3";
+            SqlView=SqlView.replace(replOld, arrV[2]);
+
+            replOld="?4";
+            SqlView=SqlView.replace(replOld, arrV[3]);
+
+            System.out.println("SqlView="+SqlView);
+            //System.out.println("str="+str);
+
+            stmt.executeUpdate(SqlView);
+
+
+            conn.commit();
+
+            if (stmt != null) {
+                stmt.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return id;
+
+    }
+
+    public static String updTWLMVALUES(String[] arrV) {
+
+        String id=arrV[0];
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.SQLupdTWLMVALUES();
+
+        try {
+            conn.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("SqlView upd SQLite=" + SqlView);
+        if (conn==null){
+            id="connection not work";
+            return id;};
+
+        try {
+
+
+            Statement stmt = null;
+            stmt=conn.createStatement();
+
+            String replOld;
+            //String str;
+            replOld="?4";
+            SqlView=SqlView.replace(replOld, id);
+            replOld="?1";
+            SqlView=SqlView.replace(replOld, arrV[1]);
+
+            replOld="?2";
+            SqlView=SqlView.replace(replOld, arrV[2]);
+
+            replOld="?3";
+            SqlView=SqlView.replace(replOld, arrV[3]);
+
+            System.out.println("SqlView="+SqlView);
+            //System.out.println("str="+str);
+
+            stmt.executeUpdate(SqlView);
+
+            conn.commit();
+
+            if (stmt != null) {
+                stmt.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return id;
+
+    }
+
+    public static String delTWLMVALUES(String[] arrV) {
+
+        String id=arrV[0];
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.SQLdelTWLMVALUES();
+
+        try {
+            conn.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("SqlView del SQLite=" + SqlView);
+        if (conn==null){
+            id="connection not work";
+            return id;};
+
+        try {
+
+
+            Statement stmt = null;
+            stmt=conn.createStatement();
+
+            String replOld;
+            //String str;
+            replOld="?1";
+            SqlView=SqlView.replace(replOld, id);
+
+            System.out.println("SqlView="+SqlView);
+            //System.out.println("str="+str);
+
+            stmt.executeUpdate(SqlView);
+
+            conn.commit();
+
+            if (stmt != null) {
+                stmt.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return id;
+
+    }
 
 
 

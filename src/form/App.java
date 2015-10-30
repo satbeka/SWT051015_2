@@ -164,7 +164,7 @@ public class App {
       */
       TableOnForm tableOnForm=new TableOnForm();
       tableOnForm.setDisplay2(display);
-      tableOnForm.load(arrayListData, "Sbori", "id", "name", "data_sbora");
+      tableOnForm.load(arrayListData, "Sbori", "id", "name", "data_sbora",null,null);
 
 
     }
@@ -190,7 +190,7 @@ public class App {
       */
       TableOnForm tableOnForm=new TableOnForm();
       tableOnForm.setDisplay2(display);
-      tableOnForm.load(arrayListData, "TWLTCSTATUS","id", "vTCSTATUS ", "vTCSTATUS_RU ");
+      tableOnForm.load(arrayListData, "TWLTCSTATUS","id", "vTCSTATUS ", "vTCSTATUS_RU ",null,null);
     }
 
     public void widgetDefaultSelected(SelectionEvent event) {
@@ -215,7 +215,7 @@ public class App {
       TableOnForm tableOnForm=new TableOnForm();
       tableOnForm.setDisplay2(display);
       tableOnForm.load(arrayListData, "TTCPERSONAL","id",
-              "vTCSTATUS ", "vTCSTATUS_RU ");
+              "vSURNAME ", "vFIRSTNAME ","vMIDDLENAME",null);
     }
 
     public void widgetDefaultSelected(SelectionEvent event) {
@@ -226,11 +226,15 @@ public class App {
 
   class nagrzkaF9ItemListener implements SelectionListener {
     public void widgetSelected(SelectionEvent event) {
-      label.setText("Saved");
+      label.setText("nagrzkaF9ItemListener");
+
+
+
+
     }
 
     public void widgetDefaultSelected(SelectionEvent event) {
-      label.setText("Saved");
+      label.setText("Saved2");
     }
   }
 

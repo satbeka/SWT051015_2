@@ -2,7 +2,6 @@ package form;
 import dboperation.UserData;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableCursor;
-import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.*;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.RowLayout;
@@ -10,9 +9,8 @@ import org.eclipse.swt.widgets.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
-public class TableOnForm {
+public class ComboListOnForm {
     public Display getDisplay2() {
         return display2;
     }
@@ -25,13 +23,14 @@ public class TableOnForm {
     private Shell shell2;
 
     private Table table;
-    private TableColumn stringColumn1,stringColumn2,stringColumn3,stringColumn4,dateColumn,doubleColumn,hourColumn;
+    private TableColumn stringColumn1,stringColumn2,stringColumn3,stringColumn4,stringColumn5,dateColumn,doubleColumn,hourColumn;
     private String tabTitle;
+    private Combo comboDropDown;// = new Combo(shell2, SWT.DROP_DOWN | SWT.BORDER);
 
     Menu contextMenu;
 
     public void load(ArrayList<String[]> arrayListData,String tabTitle,String itTitleId, String itTitle1,String itTitle2
-            ,String itTitle3,String itTitle4
+            ,String itTitle3,String itTitle4,String itTitle5
     ) {
 
         shell2 = new Shell(display2);
@@ -41,7 +40,15 @@ public class TableOnForm {
         shell2.setLayout(new FillLayout());
 
 
+        final Combo c = new Combo(shell2, SWT.READ_ONLY);
+        c.setBounds(50, 50, 150, 65);
+        String items[] = { "Item One", "Item Two", "Item Three", "Item Four",
+                "Item Five" };
+        c.setItems(items);
+
+
         table = new Table(shell2, SWT.HIDE_SELECTION | SWT.SINGLE | SWT.FULL_SELECTION | SWT.BORDER);
+        //TWLMVALUES
         table.setHeaderVisible(true);
         table.setLinesVisible(true);
 
@@ -49,23 +56,22 @@ public class TableOnForm {
         stringColumn1.setText(itTitleId);
         stringColumn1.setWidth(120);
 
-        stringColumn1 = new TableColumn(table, SWT.CENTER);
-        stringColumn1.setText(itTitle1);
-        stringColumn1.setWidth(120);
-        //intColumn.addListener(SWT.Selection, SortListenerFactory.getListener(SortListenerFactory.INT_COMPARATOR));
-
         stringColumn2 = new TableColumn(table, SWT.CENTER);
         stringColumn2.setText(itTitle2);
         stringColumn2.setWidth(120);
 
-if (tabTitle=="TTCPERSONAL"){
+        stringColumn3 = new TableColumn(table, SWT.CENTER);
+        stringColumn3.setText(itTitle3);
+        stringColumn3.setWidth(120);
 
-    stringColumn3 = new TableColumn(table, SWT.CENTER);
-    stringColumn3.setText(itTitle3);
-    stringColumn3.setWidth(120);
+        stringColumn4 = new TableColumn(table, SWT.CENTER);
+        stringColumn4.setText(itTitle4);
+        stringColumn4.setWidth(120);
 
+        stringColumn5 = new TableColumn(table, SWT.CENTER);
+        stringColumn5.setText(itTitle5);
+        stringColumn5.setWidth(120);
 
-}
 
         int size=table.getColumnCount();
         int sizeData=arrayListData.size();
