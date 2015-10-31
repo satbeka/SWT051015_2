@@ -37,6 +37,14 @@
     <entry key="SQLupdTTCTEAMS">update TTCTEAMS set vNAME='?1',vTEAMDESC='?2' where id=?3</entry>
     <entry key="SQLdelTTCTEAMS">delete from TTCTEAMS where id=?1</entry>
 
+	<entry key="SQLselListTWLMVALUES">select t.ID, t.vTCAMPID, t.vTCSID, t.vTCTID, t.vTRAININGDATE,t.vTTSEQUENCE,t.vTRAININGID
+	,t.vTRAININGDUR_V,t.vMPULSEP10S_b from TWLMVALUES t</entry>
+<entry key="SQLinsTWLMVALUES">insert into TWLMVALUES(id,vTCAMPID,vTCSID,vTCTID,vTRAININGDATE,vTTSEQUENCE,vTRAININGID,vTRAININGDUR_V,vMPULSEP10S_b) 
+values (?1,'?2','?3','?4','?5','?6','?7','?8','?9')</entry>
+	<entry key="SQLselMaxIdTWLMVALUES">SELECT max(id) FROM TWLMVALUES</entry>
+    <entry key="SQLupdTWLMVALUES">update TWLMVALUES set vTCAMPID='?1',vTCSID='?2',vTCTID='?3',vTRAININGDATE='?4',vTTSEQUENCE='?5'
+	,vTRAININGID='?6',vTRAININGDUR_V='?7',vMPULSEP10S_b='?8' where id=?4</entry>
+    <entry key="SQLdelTWLMVALUES">delete from TWLMVALUES where id=?1</entry>
 	
 	
 
