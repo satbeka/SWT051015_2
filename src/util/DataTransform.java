@@ -182,7 +182,6 @@ public class DataTransform {
             arrV[7]=tTWLMVALUES.getvTRAININGDUR_V();
             arrV[8]=tTWLMVALUES.getvTRAININGID();
             arrV[9]=tTWLMVALUES.getvTTSEQUENCE();
-            77
 
 
 
