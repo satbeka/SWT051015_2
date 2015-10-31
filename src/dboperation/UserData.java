@@ -800,7 +800,7 @@ public class UserData  {
 
                 //t.ID, t.vTCAMPID, t.vTCSID, t.vTCTID, t.vTRAININGDATE,t.vTTSEQUENCE,t.vTRAININGID
                 //,t.vTRAININGDUR_V,t.vMPULSEP10S_b
-77
+
                 tTWLMVALUES.setId(rs.getString(1));
                 tTWLMVALUES.setvTCAMPID(rs.getString(2));
                 System.out.println("tTWLMVALUES rs.get(2)=" + rs.getString(2));
