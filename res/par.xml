@@ -45,7 +45,7 @@ values (?1,'?2','?3','?4','?5','?6','?7','?8','?9')</entry>
     <entry key="SQLupdTWLMVALUES">update TWLMVALUES set vTCAMPID='?1',vTCSID='?2',vTCTID='?3',vTRAININGDATE='?4',vTTSEQUENCE='?5'
 	,vTRAININGID='?6',vTRAININGDUR_V='?7',vMPULSEP10S_b='?8' where id=?4</entry>
     <entry key="SQLdelTWLMVALUES">delete from TWLMVALUES where id=?1</entry>
-	55
+	
 	
 
 </properties>
