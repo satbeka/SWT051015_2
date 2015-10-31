@@ -23,14 +23,17 @@ public class ComboListOnForm {
     private Shell shell2;
 
     private Table table;
-    private TableColumn stringColumn1,stringColumn2,stringColumn3,stringColumn4,stringColumn5,dateColumn,doubleColumn,hourColumn;
+    private TableColumn stringColumn1,stringColumn2,stringColumn3,stringColumn4,stringColumn5,
+            stringColumn6,stringColumn7,stringColumn8,stringColumn9
+            ,dateColumn,doubleColumn,hourColumn;
     private String tabTitle;
     private Combo comboDropDown;// = new Combo(shell2, SWT.DROP_DOWN | SWT.BORDER);
 
     Menu contextMenu;
 
-    public void load(ArrayList<String[]> arrayListData,String tabTitle,String itTitleId, String itTitle1,String itTitle2
-            ,String itTitle3,String itTitle4,String itTitle5
+    public void load(ArrayList<String[]> arrayListData,String tabTitle,String itTitleId,
+                     String itTitle1,String itTitle2,String itTitle3,String itTitle4,String itTitle5,
+                     String itTitle6,String itTitle7,String itTitle8,String itTitle9
     ) {
 
         shell2 = new Shell(display2);
@@ -49,6 +52,9 @@ public class ComboListOnForm {
 
         table = new Table(shell2, SWT.HIDE_SELECTION | SWT.SINGLE | SWT.FULL_SELECTION | SWT.BORDER);
         //TWLMVALUES
+        //"vTCAMPID", "vTCSID", "vTCTID", "vTRAININGDATE","vTTSEQUENCE","vTRAININGID"
+          //      ,"vTRAININGDUR_V","vMPULSEP10S_b"
+
         table.setHeaderVisible(true);
         table.setLinesVisible(true);
 
@@ -71,6 +77,22 @@ public class ComboListOnForm {
         stringColumn5 = new TableColumn(table, SWT.CENTER);
         stringColumn5.setText(itTitle5);
         stringColumn5.setWidth(120);
+
+        stringColumn6 = new TableColumn(table, SWT.CENTER);
+        stringColumn6.setText(itTitle6);
+        stringColumn6.setWidth(120);
+
+        stringColumn7 = new TableColumn(table, SWT.CENTER);
+        stringColumn7.setText(itTitle7);
+        stringColumn7.setWidth(120);
+
+        stringColumn8 = new TableColumn(table, SWT.CENTER);
+        stringColumn8.setText(itTitle8);
+        stringColumn8.setWidth(120);
+
+        stringColumn9 = new TableColumn(table, SWT.CENTER);
+        stringColumn9.setText(itTitle9);
+        stringColumn9.setWidth(120);
 
 
         int size=table.getColumnCount();

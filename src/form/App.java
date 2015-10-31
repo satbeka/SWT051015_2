@@ -228,7 +228,22 @@ public class App {
     public void widgetSelected(SelectionEvent event) {
       label.setText("nagrzkaF9ItemListener");
 
+      ArrayList<String[]> arrayListData= DataTransform.getTWLMVALUES(
+              UserData.getTWLMVALUESFromSQLite());
+      /*
+      arrayList.add("Beg 100;Beg");
+      arrayList.add("Beg 800;Beg");
+      arrayList.add("Skakalka;CPY");
+      arrayList.add("Razminka;OFP");
+      arrayList.add("Razminka;CPY");
+      arrayList.add("Rabota v parax;CTTM");
+      */
 
+      ComboListOnForm comboListOnForm=new ComboListOnForm();
+      comboListOnForm.setDisplay2(display);
+      comboListOnForm.load(arrayListData, "TWLMVALUES", "id",
+              "vTCAMPID", "","vTCSID", "vTCTID", "vTRAININGDATE","vTTSEQUENCE","vTRAININGID"
+              ,"vTRAININGDUR_V","vMPULSEP10S_b");
 
 
     }

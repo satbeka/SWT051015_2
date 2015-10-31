@@ -6,6 +6,7 @@ import common.SQLiteDB;
 import common.SQLiteSQL;
 import model.Sbor;
 import model.TTCPERSONAL;
+import model.TWLMVALUES;
 import model.TWLTCSTATUS;
 import util.DataTransform;
 
@@ -766,6 +767,80 @@ public class UserData  {
     }
 
 
+
+
+    public static ArrayList<TWLMVALUES> getTWLMVALUESFromSQLite() {
+
+        ArrayList<TWLMVALUES> listTWLMVALUES = new ArrayList<TWLMVALUES>();
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.getSQLselListTWLMVALUES();
+
+        System.out.println("SqlView SQLite=" + SqlView);
+        if (conn==null){
+            TWLMVALUES tTWLMVALUES = new TWLMVALUES();
+            tTWLMVALUES.setId("connection not work");
+            listTWLMVALUES.add(tTWLMVALUES);
+            return listTWLMVALUES;};
+
+        try {
+
+            Statement statement = conn.createStatement();
+
+
+            ResultSet rs=statement.executeQuery(SqlView);
+            System.out.println("   User SqlView.executeQ().......");
+            //conn.commit();
+            int k = 0;
+
+            while (rs.next()) {
+
+                TWLMVALUES tTWLMVALUES = new TWLMVALUES ();
+
+
+                //t.ID, t.vTCAMPID, t.vTCSID, t.vTCTID, t.vTRAININGDATE,t.vTTSEQUENCE,t.vTRAININGID
+                //,t.vTRAININGDUR_V,t.vMPULSEP10S_b
+
+                tTWLMVALUES.setId(rs.getString(1));
+                tTWLMVALUES.setvTCAMPID(rs.getString(2));
+                System.out.println("tTWLMVALUES rs.get(2)=" + rs.getString(2));
+                tTWLMVALUES.setvTCSID(rs.getString(3));
+                tTWLMVALUES.setvTCTID(rs.getString(4));
+                tTWLMVALUES.setvTRAININGDATE(rs.getString(5));
+                tTWLMVALUES.setvTTSEQUENCE(rs.getString(6));
+                tTWLMVALUES.setvTRAININGID(rs.getString(7));
+                tTWLMVALUES.setvTRAININGDUR_V(rs.getString(8));
+                tTWLMVALUES.setvMPULSEP10S_b(rs.getString(9));
+
+
+
+                k++;
+
+                listTWLMVALUES.add(tTWLMVALUES);
+
+            };
+
+
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return listTWLMVALUES;
+
+    }
 
     public static String insTWLMVALUES(String[] arrV) {
 
