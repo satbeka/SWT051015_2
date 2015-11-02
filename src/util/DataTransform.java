@@ -141,9 +141,9 @@ public class DataTransform {
             tTCPERSONAL=arrayList.get(i);
             String[] arrV=new String[size];
             arrV[0]=tTCPERSONAL.getId();
-            arrV[1]=tTCPERSONAL.getvFIRSTNAME();
-            arrV[2]=tTCPERSONAL.getvMIDDLENAME();
-            arrV[3]=tTCPERSONAL.getvSURNAME();
+            arrV[2]=tTCPERSONAL.getvFIRSTNAME();
+            arrV[3]=tTCPERSONAL.getvMIDDLENAME();
+            arrV[1]=tTCPERSONAL.getvSURNAME();
 
             System.out.println("arrV="+arrV);
             arrRez.add(arrV);

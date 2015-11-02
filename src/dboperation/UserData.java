@@ -795,7 +795,7 @@ public class UserData  {
             ResultSet rs=statement.executeQuery(SqlView);
             System.out.println("   User SqlView.executeQ().......");
 
-            stmt.executeUpdate(SqlView);
+            //stmt.executeUpdate(SqlView);
             int k = 0;
 
             while (rs.next()) {
