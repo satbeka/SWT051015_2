@@ -1185,6 +1185,8 @@ public class UserData  {
 
         String idPers=UserData.getIdTTCPERSONALid(pers);
 
+        String idTeam=UserData.getIdTTCTEAMSid(team);
+
         ArrayList<TWLMVALUES> listTWLMVALUES = new ArrayList<TWLMVALUES>();
         Connection conn = SQLiteDB.connectDB();
         String SqlView = SQLiteSQL.SQLselListTWLMVALUES_wherePersAndTeam();
