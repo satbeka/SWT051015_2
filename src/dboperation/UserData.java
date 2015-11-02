@@ -4,10 +4,7 @@ import common.OracleDB;
 import common.OracleSQL;
 import common.SQLiteDB;
 import common.SQLiteSQL;
-import model.Sbor;
-import model.TTCPERSONAL;
-import model.TWLMVALUES;
-import model.TWLTCSTATUS;
+import model.*;
 import util.DataTransform;
 
 
@@ -78,23 +75,23 @@ public class UserData  {
         //System.out.println("engCod="+engCod);
         if (engCod.contains("JURRZ")) {
             //System.out.println(" ur lico   ");
-            return "Р®СЂ.Р»РёС†Рѕ    " + "\n" + " (СЂРµР·РёРґРµРЅС‚ Р Рљ)";
+            return "Юр.лицо    " + "\n" + " (резидент РК)";
         }
         if (engCod.contains("FIZRZ")) {
-            return "Р¤РёР·.Р»РёС†Рѕ (СЂРµР·РёРґРµРЅС‚ Р Рљ)";
+            return "Физ.лицо (резидент РК)";
         }
         if (engCod.contains("JURNN")) {
-            return "Р®СЂ.Р»РёС†Рѕ       \"+\"\\n\"+\" (РЅРµСЂРµР·РёРґРµРЅС‚)";
+            return "Юр.лицо       \"+\"\\n\"+\" (нерезидент)";
         }
         if (engCod.contains("FIZNN")) {
-            return "Р¤РёР·.Р»РёС†Рѕ (РЅРµСЂРµР·РёРґРµРЅС‚)";
+            return "Физ.лицо (нерезидент)";
         }
 
         if (engCod.contains("STBNK")) {
-            return "Р‘Р°РЅРє РІС‚РѕСЂРѕРіРѕ СѓСЂРѕРІРЅСЏ Р Рљ";
+            return "Банк второго уровня РК";
         }
         if (engCod.contains("INSOR")) {
-            return "РЎС‚СЂР°С…РѕРІР°СЏ РѕСЂРіР°РЅРёР·Р°С†РёСЏ Р Рљ";
+            return "Страховая организация РК";
         }
 
 
@@ -768,8 +765,359 @@ public class UserData  {
 
 
 
+    public static ArrayList<TTCTEAMS> getTTCTEAMSFromSQLite() {
+
+        ArrayList<TTCTEAMS> listTTCTEAMS = new ArrayList<TTCTEAMS>();
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.getSQLselListTTCTEAMS();
+
+        System.out.println("SqlView SQLite=" + SqlView);
+        if (conn==null){
+            TTCTEAMS tTTCTEAMS = new TTCTEAMS();
+            tTTCTEAMS.setId("connection not work");
+            listTTCTEAMS.add(tTTCTEAMS);
+            return listTTCTEAMS;};
+
+        try {
+
+            Statement statement = conn.createStatement();
+
+
+            ResultSet rs=statement.executeQuery(SqlView);
+            System.out.println("   User SqlView.executeQ().......");
+            //conn.commit();
+            int k = 0;
+
+            while (rs.next()) {
+
+                TTCTEAMS tTTCTEAMS = new TTCTEAMS ();
+
+                tTTCTEAMS.setId(rs.getString(1));
+                tTTCTEAMS.setvNAME(rs.getString(2));
+                System.out.println("tTTCTEAMS rs.get(2)=" + rs.getString(2));
+                tTTCTEAMS.setvTEAMDESC(rs.getString(3));
+                k++;
+
+                listTTCTEAMS.add(tTTCTEAMS);
+
+            };
+
+
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return listTTCTEAMS;
+
+    }
+
+
+
+    public static String insTTCTEAMS(String[] arrV) {
+
+        String id="--";
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.SQLselMaxIdTTCTEAMS();
+
+        System.out.println("SqlView ins max SQLite=" + SqlView);
+        if (conn==null){
+            id="connection not work";
+            return id;};
+
+        try {
+
+            Statement statement = conn.createStatement();
+            ResultSet rs=statement.executeQuery(SqlView);
+            System.out.println("   User Max SqlView.executeQ().......");
+            //conn.commit();
+
+            while (rs.next()) {
+                id=rs.getString(1);
+                System.out.println("id=="+id);
+            };
+
+            int id_=Integer.parseInt(id)+1;
+            id=String.valueOf(id_);
+            System.out.println("id max+1=="+id);
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        conn = SQLiteDB.connectDB();
+        SqlView = SQLiteSQL.SQLinsTTCTEAMS();
+
+        try {
+            conn.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("SqlView ins SQLite=" + SqlView);
+        if (conn==null){
+            id="connection not work";
+            return id;};
+
+        try {
+
+
+            Statement stmt = null;
+            stmt=conn.createStatement();
+
+            String replOld;
+            //String str;
+            replOld="?1";
+            SqlView=SqlView.replace(replOld, id);
+            replOld="?2";
+            SqlView=SqlView.replace(replOld, arrV[1]);
+
+            replOld="?3";
+            SqlView=SqlView.replace(replOld, arrV[2]);
+
+            System.out.println("SqlView="+SqlView);
+            //System.out.println("str="+str);
+
+            stmt.executeUpdate(SqlView);
+
+
+            conn.commit();
+
+            if (stmt != null) {
+                stmt.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return id;
+
+    }
+
+    public static String updTTCTEAMS(String[] arrV) {
+
+        String id=arrV[0];
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.SQLupdTTCTEAMS();
+
+        try {
+            conn.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("SqlView upd SQLite=" + SqlView);
+        if (conn==null){
+            id="connection not work";
+            return id;};
+
+        try {
+
+
+            Statement stmt = null;
+            stmt=conn.createStatement();
+
+            String replOld;
+            //String str;
+            replOld="?3";
+            SqlView=SqlView.replace(replOld, id);
+            replOld="?1";
+            SqlView=SqlView.replace(replOld, arrV[1]);
+
+            replOld="?2";
+            SqlView=SqlView.replace(replOld, arrV[2]);
+
+            System.out.println("SqlView="+SqlView);
+            //System.out.println("str="+str);
+
+            stmt.executeUpdate(SqlView);
+
+            conn.commit();
+
+            if (stmt != null) {
+                stmt.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return id;
+
+    }
+
+    public static String delTTCTEAMS(String[] arrV) {
+
+        String id=arrV[0];
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.SQLdelTTCTEAMS();
+
+        try {
+            conn.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("SqlView del SQLite=" + SqlView);
+        if (conn==null){
+            id="connection not work";
+            return id;};
+
+        try {
+
+
+            Statement stmt = null;
+            stmt=conn.createStatement();
+
+            String replOld;
+            //String str;
+            replOld="?1";
+            SqlView=SqlView.replace(replOld, id);
+
+            System.out.println("SqlView="+SqlView);
+            //System.out.println("str="+str);
+
+            stmt.executeUpdate(SqlView);
+
+            conn.commit();
+
+            if (stmt != null) {
+                stmt.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return id;
+
+    }
+
 
     public static ArrayList<TWLMVALUES> getTWLMVALUESFromSQLite() {
+
+        ArrayList<TWLMVALUES> listTWLMVALUES = new ArrayList<TWLMVALUES>();
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.getSQLselListTWLMVALUES();
+
+        System.out.println("SqlView SQLite=" + SqlView);
+        if (conn==null){
+            TWLMVALUES tTWLMVALUES = new TWLMVALUES();
+            tTWLMVALUES.setId("connection not work");
+            listTWLMVALUES.add(tTWLMVALUES);
+            return listTWLMVALUES;};
+
+        try {
+
+            Statement statement = conn.createStatement();
+
+
+            ResultSet rs=statement.executeQuery(SqlView);
+            System.out.println("   User SqlView.executeQ().......");
+            //conn.commit();
+            int k = 0;
+
+            while (rs.next()) {
+
+                TWLMVALUES tTWLMVALUES = new TWLMVALUES ();
+
+
+                //t.ID, t.vTCAMPID, t.vTCSID, t.vTCTID, t.vTRAININGDATE,t.vTTSEQUENCE,t.vTRAININGID
+                //,t.vTRAININGDUR_V,t.vMPULSEP10S_b
+
+                tTWLMVALUES.setId(rs.getString(1));
+                tTWLMVALUES.setvTCAMPID(rs.getString(2));
+                System.out.println("tTWLMVALUES rs.get(2)=" + rs.getString(2));
+                tTWLMVALUES.setvTCSID(rs.getString(3));
+                tTWLMVALUES.setvTCTID(rs.getString(4));
+                tTWLMVALUES.setvTRAININGDATE(rs.getString(5));
+                tTWLMVALUES.setvTTSEQUENCE(rs.getString(6));
+                tTWLMVALUES.setvTRAININGID(rs.getString(7));
+                tTWLMVALUES.setvTRAININGDUR_V(rs.getString(8));
+                tTWLMVALUES.setvMPULSEP10S_b(rs.getString(9));
+
+
+
+                k++;
+
+                listTWLMVALUES.add(tTWLMVALUES);
+
+            };
+
+
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return listTWLMVALUES;
+
+    }
+
+    public static ArrayList<TWLMVALUES> getTWLMVALUESFromSQLite(String pers,String team) {
 
         ArrayList<TWLMVALUES> listTWLMVALUES = new ArrayList<TWLMVALUES>();
 
@@ -1076,11 +1424,11 @@ public class UserData  {
         String SqlView = SQLiteSQL.getSQLselListSbor();
 
         System.out.println("SqlView SQLite=" + SqlView);
-if (conn==null){
-    Sbor sbor = new Sbor();
-    sbor.setName("connection not work");
-    listSbor.add(sbor);
-    return listSbor;};
+        if (conn==null){
+            Sbor sbor = new Sbor();
+            sbor.setName("connection not work");
+            listSbor.add(sbor);
+            return listSbor;};
 
         try {
 
@@ -1160,7 +1508,7 @@ if (conn==null){
             //conn.commit();
 
             while (rs.next()) {
-               id=rs.getString(1);
+                id=rs.getString(1);
                 System.out.println("id=="+id);
             };
 
@@ -1274,3 +1622,4 @@ if (conn==null){
     }
 
 }
+

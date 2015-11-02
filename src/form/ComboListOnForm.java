@@ -1,11 +1,15 @@
 package form;
 import dboperation.UserData;
+import model.TTCPERSONAL;
+import model.TTCTEAMS;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableCursor;
 import org.eclipse.swt.events.*;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
+import util.DataTransform;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,30 +34,82 @@ public class ComboListOnForm {
     private Combo comboDropDown;// = new Combo(shell2, SWT.DROP_DOWN | SWT.BORDER);
 
     Menu contextMenu;
+    final ArrayList<String[]> arrayListData=new ArrayList<>();
 
-    public void load(ArrayList<String[]> arrayListData,String tabTitle,String itTitleId,
+    public void load(String tabTitle,String itTitleId,
                      String itTitle1,String itTitle2,String itTitle3,String itTitle4,String itTitle5,
                      String itTitle6,String itTitle7,String itTitle8,String itTitle9
     ) {
 
         shell2 = new Shell(display2);
 
-        shell2.setSize(600, 450);
+        shell2.setSize(500, 500);
         shell2.setText(tabTitle);
-        shell2.setLayout(new FillLayout());
+        //shell2.setLayout(new FillLayout());
+
+        GridLayout gridLayout = new GridLayout(1, false);
+        gridLayout.verticalSpacing = 3;
 
 
-        final Combo c = new Combo(shell2, SWT.READ_ONLY);
-        c.setBounds(50, 50, 150, 65);
-        String items[] = { "Item One", "Item Two", "Item Three", "Item Four",
-                "Item Five" };
-        c.setItems(items);
+        Label label = new Label(shell2, SWT.NULL);
+        label.setText(" Personal ");
+        //final Combo c = new Combo(shell2, SWT.READ_ONLY);
+        final Combo c1 = new Combo(shell2, SWT.READ_ONLY|SWT.NULL);
+        //c1.setBounds(50, 50, 150, 65);
 
+        label = new Label(shell2, SWT.NULL);
+        label.setText(" Teams ");
+        final Combo c2 = new Combo(shell2, SWT.READ_ONLY|SWT.NULL);
+        //c2.setBounds(50, 85, 150, 65);
+        //s.setSize(250, 250);
+        //c.setBounds(50, 50, 150, 65);
+        ArrayList<TTCPERSONAL> data= UserData.getTTCPERSONALFromSQLite();
+        String items1[]=new String[data.size()];;
+        String str;
+        int l=0;
+        for (TTCPERSONAL ttcpersonal: data) {
+            str=ttcpersonal.getvFIRSTNAME()+" "+ttcpersonal.getvMIDDLENAME()+" "+ttcpersonal.getvSURNAME();
+            items1[l]=str;
+            l++;
+            System.out.println(str);
+        }
+
+
+                //{ "Item One", "Item Two", "Item Three", "Item Four", "Item Five" };
+
+
+
+        c1.setItems(items1);
+
+        ArrayList<TTCTEAMS> data2= UserData.getTTCTEAMSFromSQLite();
+        String items2[]=new String[data2.size()];
+        l=0;
+        for (TTCTEAMS ttcteams: data2) {
+            str=ttcteams.getvNAME();
+            items2[l]=str;
+            l++;
+            System.out.println(str);
+        }
+
+        c2.setItems(items2);
+
+
+
+
+
+        Button buttonDiagrm=new Button(shell2,SWT.BUTTON2);
+        buttonDiagrm.setText("Diagamma");
+
+        Button buttonExl=new Button(shell2,SWT.BUTTON2);
+        buttonExl.setText("Export Excel");
+
+
+        shell2.setLayout(gridLayout);
 
         table = new Table(shell2, SWT.HIDE_SELECTION | SWT.SINGLE | SWT.FULL_SELECTION | SWT.BORDER);
         //TWLMVALUES
         //"vTCAMPID", "vTCSID", "vTCTID", "vTRAININGDATE","vTTSEQUENCE","vTRAININGID"
-          //      ,"vTRAININGDUR_V","vMPULSEP10S_b"
+        //      ,"vTRAININGDUR_V","vMPULSEP10S_b"
 
         table.setHeaderVisible(true);
         table.setLinesVisible(true);
@@ -94,35 +150,59 @@ public class ComboListOnForm {
         stringColumn9.setText(itTitle9);
         stringColumn9.setWidth(120);
 
-
         int size=table.getColumnCount();
-        int sizeData=arrayListData.size();
+
+                //DataTransform.getTWLMVALUES(UserData.getTWLMVALUESFromSQLite());
+
+        int sizeData= arrayListData.size();
         String[] arrV=new String[size];
         for (int i = 0; i < sizeData; i++) {
 
             // ok now store it in the table
             TableItem item = new TableItem(table, SWT.NONE);
-            arrV=arrayListData.get(i);
-
-/*
-            //item.setText(v);
-            k=v.indexOf(";");
-            strV1=v.substring(0, k);
-            item.setData("Id", strV1);
-            System.out.println(" Id="+item.getData("Id"));
-
-            strV=v.substring(k+1);
-            k=strV.indexOf(";");
-            strV2=strV.substring(0, k);
-            strV3=strV.substring(k + 1);
-*/ //251015
-
+            arrV= arrayListData.get(i);
             item.setText(arrV);
 
-            //item.setText(new String[] { int_value, string_value, date_value, double_value, hour_value });
+        }
 
+
+
+        c1.addSelectionListener(new SelectionAdapter() {
+            public void widgetSelected(SelectionEvent e) {
+                if (c1.getText()!=null) {
+                    System.out.println("c1.getText()="+c1.getText());
+                    if (c2.getText()!=null){
+                        System.out.println("c2.getText()="+c2.getText());
+
+                        int size=table.getColumnCount();
+                        arrayListData =DataTransform.getTWLMVALUES(UserData.getTWLMVALUESFromSQLite());
+                        int sizeData= arrayListData.size();
+                        String[] arrV=new String[size];
+                        for (int i = 0; i < sizeData; i++) {
+
+                            // ok now store it in the table
+                            TableItem item = new TableItem(table, SWT.NONE);
+                            arrV= arrayListData.get(i);
+                            item.setText(arrV);
+
+                        }
+
+
+                    }
+
+
+
+                } else if (c1.getText().equals("Item Two")) {
+                    String newItems[] = { "Item Two A", "Item Two B",
+                            "Item Two C" };
+                    c2.setItems(newItems);
+                    c2.setEnabled(true);
+                }
 
             }
+        });
+
+
 
 
         // Create the listener
@@ -155,289 +235,264 @@ public class ComboListOnForm {
                                     }
         );
 
-            mItem1.setData("Id", cursor.getRow());
+        mItem1.setData("Id", cursor.getRow());
 
 
-            //Insert
-            mItem1.addListener(SWT.Selection, new
+        //Insert
+        mItem1.addListener(SWT.Selection, new
 
-                            Listener() {
-                                public void handleEvent(Event e) {
-                                    System.out.println("Add Test.");
-
-
-                                    final Shell shellEdit = new Shell(display2, SWT.NO);
-                                    RowLayout layout = new RowLayout(SWT.VERTICAL);
-                                    layout.marginLeft = 20;
-                                    layout.marginTop = 20;
-                                    //layout.justify = true;
-
-                                    //shellEdit = new Shell(display2, SWT.NO);
-                                    shellEdit.setText("Add");
-                                    shellEdit.setSize(300, 300);
-                                    shellEdit.setLayout(layout);
-
-                    /*
-                    final Text text = new Text(cursor, SWT.VERTICAL);
-                    text.setFocus();
-                    // Copy the text from the cell to the Text control
-                    text.setText(cursor.getRow().getText());
-                    text.setFocus();
-                    */
-
-                /*
-                int itInd=table.getSelectionIndex();
-                System.out.println("itInd="+itInd);
-                System.out.println("table.getItem(itInd).getText()=" + table.getItem(itInd).getText());
-                */
-
-                    /*
-                    System.out.println("e.widget=" + e.widget);
-                    Object object = e.widget;
-                    MenuItem menuItemEdit = (MenuItem) object;
-                    String id = //String.valueOf(table.getSelectionIndex());
-                            e.widget.getData("Id").toString();
-                    */
-
-                                    System.out.println("id=" + cursor.getRow());
+                        Listener() {
+                            public void handleEvent(Event e) {
+                                System.out.println("Add Test.");
 
 
-                    /*
-                    int idInt = Integer.getInteger(id);
-                    TableItem tableItemFrom = table.getItem(idInt);
-                    System.out.println("tableItemFrom.getText()=" + tableItemFrom.getText());
-                    */
+                                final Shell shellEdit = new Shell(display2, SWT.NO);
+                                RowLayout layout = new RowLayout(SWT.VERTICAL);
+                                layout.marginLeft = 20;
+                                layout.marginTop = 20;
+                                //layout.justify = true;
 
-                                    HashMap<Integer, String> map = new HashMap<Integer, String>();
-                                    for (int i = 1; i < size; i++) {
-
-                                        Label label = new Label(shellEdit, SWT.SINGLE);
-                                        label.setText(table.getColumn(i).getText());
-
-                                        Text text = new Text(shellEdit, SWT.PUSH | SWT.BORDER);
-                                        text.setFocus();
-                                        // Copy the text from the cell to the Text control
-
-                                        //table.getItem(itInd).getText()
-
-                                        //text.setText(cursor.getRow().getText(i));
-                                        text.setText("");
-                                        //map.put(i,cursor.getRow().getText(i));
-                                        map.put(i, "");
-                                        final Integer k = i;
-                                        //text.setData("columnId",i);
-                                        text.setEditable(true);
-                                        text.setFocus();
-
-                                        text.addModifyListener(new ModifyListener() {
-                                            public void modifyText(ModifyEvent me) {
-                                                //Text textM=(Text)me.widget;
-                                                //System.out.println("textM.getText()="+textM.getText());
-                                                //text.setData("");
-                                                map.remove(k);
-                                                map.put(k, text.getText());
-                                                System.out.println("k=" + k);
-                                                System.out.println("map.get(k)=" + map.get(k));
-
-                                            }
-                                        });
-                                        //Text text = new Text(shell2, SWT.SINGLE | SWT.BORDER);
-
-                                        System.out.println("i=" + i);
-                                        //text.setText("888");
-
-                                    }
-
-
-                                    Button button = new Button(shellEdit, SWT.BUTTON2);
-                                    button.setText("Save");
-                                    button.addListener(SWT.Selection, new Listener() {
-                                        public void handleEvent(Event e) {
-                                            switch (e.type) {
-                                                case SWT.Selection:
-                                                    System.out.println("Button pressed");
-
-                                                    TableItem tableItemEdit;
-                                                    tableItemEdit = new TableItem(table, SWT.NONE);
-
-
-                                                    String strV;
-                                                    String[] arrV = new String[size];
-                                                    System.out.println("size=" + size);
-                                                    for (int i = 1; i < size; i++) {
-
-                                                        System.out.println("i=" + i);
-                                                        arrV[i] = map.get(i);
-                                                        //text.setText("888");
-
-                                                    }
-                                                    System.out.println("tabTitle="+tabTitle);
-
-                                                    if (tabTitle=="TTCPERSONAL"){
-
-                                                        arrV[0] = UserData.insTTCPERSONAL(arrV);
-
-                                                    }
-                                                    if (tabTitle=="TWLTCSTATUS"){
-
-                                                        arrV[0] = UserData.insTWLTCSTATUS(arrV);
-
-                                                    }
-                                                    if (tabTitle=="TTCTEAMS"){
-
-                                                        //arrV[0] = UserData.insTTCTEAMS(arrV);
-
-                                                    }
+                                //shellEdit = new Shell(display2, SWT.NO);
+                                shellEdit.setText("Add");
+                                shellEdit.setSize(300, 300);
+                                shellEdit.setLayout(layout);
 
 
 
-                                                    tableItemEdit.setText(arrV);
+                                System.out.println("id=" + cursor.getRow());
 
 
-                                                    break;
-                                            }
+
+                                HashMap<Integer, String> map = new HashMap<Integer, String>();
+                                for (int i = 1; i < size; i++) {
+
+                                    Label label = new Label(shellEdit, SWT.SINGLE);
+                                    label.setText(table.getColumn(i).getText());
+
+                                    Text text = new Text(shellEdit, SWT.PUSH | SWT.BORDER);
+                                    text.setFocus();
+                                    // Copy the text from the cell to the Text control
+
+                                    //table.getItem(itInd).getText()
+
+                                    //text.setText(cursor.getRow().getText(i));
+                                    text.setText("");
+                                    //map.put(i,cursor.getRow().getText(i));
+                                    map.put(i, "");
+                                    final Integer k = i;
+                                    //text.setData("columnId",i);
+                                    text.setEditable(true);
+                                    text.setFocus();
+
+                                    text.addModifyListener(new ModifyListener() {
+                                        public void modifyText(ModifyEvent me) {
+                                            //Text textM=(Text)me.widget;
+                                            //System.out.println("textM.getText()="+textM.getText());
+                                            //text.setData("");
+                                            map.remove(k);
+                                            map.put(k, text.getText());
+                                            System.out.println("k=" + k);
+                                            System.out.println("map.get(k)=" + map.get(k));
+
                                         }
                                     });
+                                    //Text text = new Text(shell2, SWT.SINGLE | SWT.BORDER);
 
-
-                                    shellEdit.open();
-
+                                    System.out.println("i=" + i);
+                                    //text.setText("888");
 
                                 }
-                            }
-
-            );
-
-            //Edit
-            mItem2.addListener(SWT.Selection, new
-
-                            Listener() {
-                                public void handleEvent(Event e) {
-                                    System.out.println("Edit Test.");
 
 
-                                    final Shell shellEdit = new Shell(display2, SWT.NO);
-                                    RowLayout layout = new RowLayout(SWT.VERTICAL);
-                                    layout.marginLeft = 20;
-                                    layout.marginTop = 20;
-                                    //layout.justify = true;
+                                Button button = new Button(shellEdit, SWT.BUTTON2);
+                                button.setText("Save");
+                                button.addListener(SWT.Selection, new Listener() {
+                                    public void handleEvent(Event e) {
+                                        switch (e.type) {
+                                            case SWT.Selection:
+                                                System.out.println("Button pressed");
 
-                                    //shellEdit = new Shell(display2, SWT.NO);
-                                    shellEdit.setText("Edit");
-                                    shellEdit.setSize(300, 300);
-                                    shellEdit.setLayout(layout);
-
-
-
-                                    System.out.println("id=" + cursor.getRow());
-                                    //TableItem item=(TableItem)e.widget;
-                                    //System.out.println("table.indexOf(item)="+table.indexOf(item));
+                                                TableItem tableItemEdit;
+                                                tableItemEdit = new TableItem(table, SWT.NONE);
 
 
-                                    HashMap<Integer, String> map = new HashMap<Integer, String>();
-                                    for (int i = 0; i < size; i++) {
+                                                String strV;
+                                                String[] arrV = new String[size];
+                                                System.out.println("size=" + size);
+                                                for (int i = 1; i < size; i++) {
 
-                                        Label label=new Label(shellEdit, SWT.SINGLE );
-                                        label.setText(table.getColumn(i).getText());
+                                                    System.out.println("i=" + i);
+                                                    arrV[i] = map.get(i);
+                                                    //text.setText("888");
 
-                                        Text text = new Text(shellEdit, SWT.PUSH| SWT.BORDER);
-                                        text.setFocus();
-                                        text.setText(cursor.getRow().getText(i));
-                                        map.put(i,cursor.getRow().getText(i));
-                                        //map.put(i,"");
-                                        final Integer k=i;
-                                        //text.setData("columnId",i);
-                                        if (i!=0)
-                                        {text.setEditable(true);}
-                                        text.setFocus();
+                                                }
+                                                System.out.println("tabTitle="+tabTitle);
 
-                                        text.addModifyListener(new ModifyListener() {
-                                            public void modifyText(ModifyEvent me) {
-                                                map.remove(k);
-                                                map.put(k, text.getText());
-                                                System.out.println("k="+k);
-                                                System.out.println("map.get(k)="+map.get(k));
+                                                if (tabTitle=="TTCPERSONAL"){
 
-                                            }
-                                        });
-                                        //Text text = new Text(shell2, SWT.SINGLE | SWT.BORDER);
+                                                    arrV[0] = UserData.insTTCPERSONAL(arrV);
 
-                                        System.out.println("i=" + i);
-                                        //text.setText("888");
+                                                }
+                                                if (tabTitle=="TWLTCSTATUS"){
 
+                                                    arrV[0] = UserData.insTWLTCSTATUS(arrV);
+
+                                                }
+                                                if (tabTitle=="TTCTEAMS"){
+
+                                                    //arrV[0] = UserData.insTTCTEAMS(arrV);
+
+                                                }
+
+
+
+                                                tableItemEdit.setText(arrV);
+
+
+                                                break;
+                                        }
                                     }
+                                });
 
 
-                                    Button button=new Button(shellEdit,SWT.BUTTON2);
-                                    button.setText("Save");
-                                    button.addListener(SWT.Selection, new Listener() {
-                                        public void handleEvent(Event e) {
-                                            switch (e.type) {
-                                                case SWT.Selection:
-                                                    System.out.println("Button pressed");
+                                shellEdit.open();
 
 
-                                                    System.out.println("id3333=" + cursor.getRow());
-                                                    //TableItem item=(TableItem)e.widget;
-                                                    //System.out.println("table.indexOf(item)="+table.indexOf(item));
-                                                    int index = table.getSelectionIndex();
-                                                    System.out.println("index table.getSelectionIndex()=" + index);
-                                                    TableItem tableItemEdit = table.getItem(index);
+                            }
+                        }
+
+        );
+
+        //Edit
+        mItem2.addListener(SWT.Selection, new
+
+                        Listener() {
+                            public void handleEvent(Event e) {
+                                System.out.println("Edit Test.");
 
 
-                                                    //tableItemEdit = new TableItem(table, SWT.NONE);
-                                                    String strV;
-                                                    String[] arrV = new String[size];
-                                                    System.out.println("size=" + size);
-                                                    for (int i = 0; i < size; i++) {
+                                final Shell shellEdit = new Shell(display2, SWT.NO);
+                                RowLayout layout = new RowLayout(SWT.VERTICAL);
+                                layout.marginLeft = 20;
+                                layout.marginTop = 20;
+                                //layout.justify = true;
 
-                                                        System.out.println("i=" + i);
-                                                        arrV[i] = map.get(i);
-                                                        //text.setText("888");
-
-                                                    }
-                                                    //arrV[0]= UserData.updTWLTCSTATUS(arrV);
+                                //shellEdit = new Shell(display2, SWT.NO);
+                                shellEdit.setText("Edit");
+                                shellEdit.setSize(300, 300);
+                                shellEdit.setLayout(layout);
 
 
-                                                    if (tabTitle=="TTCPERSONAL"){
 
-                                                        arrV[0] = UserData.updTTCPERSONAL(arrV);
+                                System.out.println("id=" + cursor.getRow());
+                                //TableItem item=(TableItem)e.widget;
+                                //System.out.println("table.indexOf(item)="+table.indexOf(item));
 
-                                                    }
-                                                    if (tabTitle=="TWLTCSTATUS"){
 
-                                                        arrV[0] = UserData.updTWLTCSTATUS(arrV);
+                                HashMap<Integer, String> map = new HashMap<Integer, String>();
+                                for (int i = 0; i < size; i++) {
 
-                                                    }
-                                                    if (tabTitle=="TTCTEAMS"){
+                                    Label label=new Label(shellEdit, SWT.SINGLE );
+                                    label.setText(table.getColumn(i).getText());
 
-                                                        //arrV[0] = UserData.insTTCTEAMS(arrV);
+                                    Text text = new Text(shellEdit, SWT.PUSH| SWT.BORDER);
+                                    text.setFocus();
+                                    text.setText(cursor.getRow().getText(i));
+                                    map.put(i,cursor.getRow().getText(i));
+                                    //map.put(i,"");
+                                    final Integer k=i;
+                                    //text.setData("columnId",i);
+                                    if (i!=0)
+                                    {text.setEditable(true);}
+                                    text.setFocus();
 
-                                                    }
+                                    text.addModifyListener(new ModifyListener() {
+                                        public void modifyText(ModifyEvent me) {
+                                            map.remove(k);
+                                            map.put(k, text.getText());
+                                            System.out.println("k="+k);
+                                            System.out.println("map.get(k)="+map.get(k));
 
-                                                    tableItemEdit.setText(arrV);
-
-                                                    shellEdit.close();
-                                                    System.out.println("shellEdit.close();====");
-                                                    break;
-                                            }
                                         }
                                     });
+                                    //Text text = new Text(shell2, SWT.SINGLE | SWT.BORDER);
 
-
-                                    System.out.println("shellEdit.open();====");
-                                    shellEdit.open();
-
-
-
-
-
-
+                                    System.out.println("i=" + i);
+                                    //text.setText("888");
 
                                 }
-                            }
 
-            );
+
+                                Button button=new Button(shellEdit,SWT.BUTTON2);
+                                button.setText("Save");
+                                button.addListener(SWT.Selection, new Listener() {
+                                    public void handleEvent(Event e) {
+                                        switch (e.type) {
+                                            case SWT.Selection:
+                                                System.out.println("Button pressed");
+
+
+                                                System.out.println("id3333=" + cursor.getRow());
+                                                //TableItem item=(TableItem)e.widget;
+                                                //System.out.println("table.indexOf(item)="+table.indexOf(item));
+                                                int index = table.getSelectionIndex();
+                                                System.out.println("index table.getSelectionIndex()=" + index);
+                                                TableItem tableItemEdit = table.getItem(index);
+
+
+                                                //tableItemEdit = new TableItem(table, SWT.NONE);
+                                                String strV;
+                                                String[] arrV = new String[size];
+                                                System.out.println("size=" + size);
+                                                for (int i = 0; i < size; i++) {
+
+                                                    System.out.println("i=" + i);
+                                                    arrV[i] = map.get(i);
+                                                    //text.setText("888");
+
+                                                }
+                                                //arrV[0]= UserData.updTWLTCSTATUS(arrV);
+
+
+                                                if (tabTitle=="TTCPERSONAL"){
+
+                                                    arrV[0] = UserData.updTTCPERSONAL(arrV);
+
+                                                }
+                                                if (tabTitle=="TWLTCSTATUS"){
+
+                                                    arrV[0] = UserData.updTWLTCSTATUS(arrV);
+
+                                                }
+                                                if (tabTitle=="TTCTEAMS"){
+
+                                                    //arrV[0] = UserData.insTTCTEAMS(arrV);
+
+                                                }
+
+                                                tableItemEdit.setText(arrV);
+
+                                                shellEdit.close();
+                                                System.out.println("shellEdit.close();====");
+                                                break;
+                                        }
+                                    }
+                                });
+
+
+                                System.out.println("shellEdit.open();====");
+                                shellEdit.open();
+
+
+
+
+
+
+
+                            }
+                        }
+
+        );
 
         //Delete
         mItem3.addListener(SWT.Selection, new
@@ -591,9 +646,9 @@ public class ComboListOnForm {
 
                                            public void mouseDoubleClick(MouseEvent e) {
                                                System.out.println("Mouse Double click.");
-            }
+                                           }
 
-        });
+                                       });
 
 
         shell2.open();

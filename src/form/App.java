@@ -18,168 +18,168 @@ import java.util.ArrayList;
 
 public class App {
 
-  Display display;
+    Display display;
 
-  Shell shell;
+    Shell shell;
 
-  Menu menuBar, fileMenu, dictMenu, nagrzkaMenu, helpMenu;
+    Menu menuBar, fileMenu, dictMenu, nagrzkaMenu, helpMenu;
 
-  MenuItem fileMenuHeader, dictMenuHeader, nagrzkaMenuHeader, helpMenuHeader;
+    MenuItem fileMenuHeader, dictMenuHeader, nagrzkaMenuHeader, helpMenuHeader;
 
-  MenuItem fileExitItem, fileSaveItem, dictSprotsmensItem, dictSboriItem, dictUprgItem,
-          dictTWLTCSTATUSItem,
-          dictTTCPERSONALItem,
-
-
-          nagrzkaF9Item,
-          helpGetHelpItem;
+    MenuItem fileExitItem, fileSaveItem, dictSprotsmensItem, dictSboriItem, dictUprgItem,
+            dictTWLTCSTATUSItem,
+            dictTTCPERSONALItem,
 
 
-  Label label;
-
-  public App() {
-
-    display = new Display();
-    shell = new Shell(display);
-    shell.setText("Menu Racshet ?????? ????????");
-    shell.setSize(600, 300);
-
-    label = new Label(shell, SWT.CENTER);
-    label.setBounds(shell.getClientArea());
-
-    menuBar = new Menu(shell, SWT.BAR);
-    fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
-    fileMenuHeader.setText("&File");
-
-    fileMenu = new Menu(shell, SWT.DROP_DOWN);
-    fileMenuHeader.setMenu(fileMenu);
-
-    fileSaveItem = new MenuItem(fileMenu, SWT.PUSH);
-    fileSaveItem.setText("&Change PWD ??????? ??????");
-
-    fileExitItem = new MenuItem(fileMenu, SWT.PUSH);
-    fileExitItem.setText("E&xit");
+    nagrzkaF9Item,
+            helpGetHelpItem;
 
 
-    //dict
-    dictMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
-    dictMenuHeader.setText("&Dictinary");
+    Label label;
 
-    dictMenu = new Menu(shell, SWT.DROP_DOWN);
-    dictMenuHeader.setMenu(dictMenu);
+    public App() {
 
-    dictSboriItem = new MenuItem(dictMenu, SWT.PUSH);
-    dictSboriItem.setText("&Sbori");
+        display = new Display();
+        shell = new Shell(display);
+        shell.setText("Menu Racshet ?????? ????????");
+        shell.setSize(600, 300);
+
+        label = new Label(shell, SWT.CENTER);
+        label.setBounds(shell.getClientArea());
+
+        menuBar = new Menu(shell, SWT.BAR);
+        fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
+        fileMenuHeader.setText("&File");
+
+        fileMenu = new Menu(shell, SWT.DROP_DOWN);
+        fileMenuHeader.setMenu(fileMenu);
+
+        fileSaveItem = new MenuItem(fileMenu, SWT.PUSH);
+        fileSaveItem.setText("&Change PWD ??????? ??????");
+
+        fileExitItem = new MenuItem(fileMenu, SWT.PUSH);
+        fileExitItem.setText("E&xit");
 
 
-    dictTWLTCSTATUSItem = new MenuItem(dictMenu, SWT.PUSH);
-    dictTWLTCSTATUSItem.setText("&TWLTCSTATUS");
+        //dict
+        dictMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
+        dictMenuHeader.setText("&Dictinary");
 
-    dictTTCPERSONALItem = new MenuItem(dictMenu, SWT.PUSH);
-    dictTTCPERSONALItem.setText("&TTCPERSONAL");
+        dictMenu = new Menu(shell, SWT.DROP_DOWN);
+        dictMenuHeader.setMenu(dictMenu);
 
-    //dict
+        dictSboriItem = new MenuItem(dictMenu, SWT.PUSH);
+        dictSboriItem.setText("&Sbori");
 
 
-    //nagryz
-    nagrzkaMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
-    nagrzkaMenuHeader.setText("&Nagryzka");
+        dictTWLTCSTATUSItem = new MenuItem(dictMenu, SWT.PUSH);
+        dictTWLTCSTATUSItem.setText("&TWLTCSTATUS");
 
-    nagrzkaMenu = new Menu(shell, SWT.DROP_DOWN);
-    nagrzkaMenuHeader.setMenu(nagrzkaMenu);
+        dictTTCPERSONALItem = new MenuItem(dictMenu, SWT.PUSH);
+        dictTTCPERSONALItem.setText("&TTCPERSONAL");
 
-    nagrzkaF9Item = new MenuItem(nagrzkaMenu, SWT.PUSH);
-    nagrzkaF9Item.setText("&nagrzk F9");
-    //nagr
+        //dict
 
-    helpMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
-    helpMenuHeader.setText("&Help");
 
-    helpMenu = new Menu(shell, SWT.DROP_DOWN);
-    helpMenuHeader.setMenu(helpMenu);
+        //nagryz
+        nagrzkaMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
+        nagrzkaMenuHeader.setText("&Nagryzka");
 
-    helpGetHelpItem = new MenuItem(helpMenu, SWT.PUSH);
-    helpGetHelpItem.setText("&Get Help");
+        nagrzkaMenu = new Menu(shell, SWT.DROP_DOWN);
+        nagrzkaMenuHeader.setMenu(nagrzkaMenu);
 
-    fileExitItem.addSelectionListener(new fileExitItemListener());
-    fileSaveItem.addSelectionListener(new fileSaveItemListener());
-    helpGetHelpItem.addSelectionListener(new helpGetHelpItemListener());
-    dictSboriItem.addSelectionListener(new dictSboriItemiListener());
+        nagrzkaF9Item = new MenuItem(nagrzkaMenu, SWT.PUSH);
+        nagrzkaF9Item.setText("&nagrzk F9");
+        //nagr
 
-    dictTWLTCSTATUSItem.addSelectionListener(new dictTWLTCSTATUSItemListener());
+        helpMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
+        helpMenuHeader.setText("&Help");
 
-    dictTTCPERSONALItem.addSelectionListener(new dictTTCPERSONALItemListener());
+        helpMenu = new Menu(shell, SWT.DROP_DOWN);
+        helpMenuHeader.setMenu(helpMenu);
 
-    nagrzkaF9Item.addSelectionListener(new nagrzkaF9ItemListener());
+        helpGetHelpItem = new MenuItem(helpMenu, SWT.PUSH);
+        helpGetHelpItem.setText("&Get Help");
 
-    shell.setMenuBar(menuBar);
-    shell.open();
-    while (!shell.isDisposed()) {
-      if (!display.readAndDispatch())
-        display.sleep();
-    }
-    display.dispose();
-  }
+        fileExitItem.addSelectionListener(new fileExitItemListener());
+        fileSaveItem.addSelectionListener(new fileSaveItemListener());
+        helpGetHelpItem.addSelectionListener(new helpGetHelpItemListener());
+        dictSboriItem.addSelectionListener(new dictSboriItemiListener());
 
-  class fileExitItemListener implements SelectionListener {
-    public void widgetSelected(SelectionEvent event) {
-      shell.close();
-      display.dispose();
+        dictTWLTCSTATUSItem.addSelectionListener(new dictTWLTCSTATUSItemListener());
+
+        dictTTCPERSONALItem.addSelectionListener(new dictTTCPERSONALItemListener());
+
+        nagrzkaF9Item.addSelectionListener(new nagrzkaF9ItemListener());
+
+        shell.setMenuBar(menuBar);
+        shell.open();
+        while (!shell.isDisposed()) {
+            if (!display.readAndDispatch())
+                display.sleep();
+        }
+        display.dispose();
     }
 
-    public void widgetDefaultSelected(SelectionEvent event) {
-      shell.close();
-      display.dispose();
+    class fileExitItemListener implements SelectionListener {
+        public void widgetSelected(SelectionEvent event) {
+            shell.close();
+            display.dispose();
+        }
+
+        public void widgetDefaultSelected(SelectionEvent event) {
+            shell.close();
+            display.dispose();
+        }
     }
-  }
 
-  class fileSaveItemListener implements SelectionListener {
-    public void widgetSelected(SelectionEvent event) {
-      label.setText("Saved");
+    class fileSaveItemListener implements SelectionListener {
+        public void widgetSelected(SelectionEvent event) {
+            label.setText("Saved");
+        }
+
+        public void widgetDefaultSelected(SelectionEvent event) {
+            label.setText("Saved");
+        }
     }
 
-    public void widgetDefaultSelected(SelectionEvent event) {
-      label.setText("Saved");
-    }
-  }
 
 
 
 
+    class dictSboriItemiListener implements SelectionListener {
+        public void widgetSelected(SelectionEvent event) {
 
-  class dictSboriItemiListener implements SelectionListener {
-    public void widgetSelected(SelectionEvent event) {
+            System.out.println(event.text);
+            System.out.println(event.detail);
+            //label.setText(event.text);
 
-      System.out.println(event.text);
-      System.out.println(event.detail);
-      //label.setText(event.text);
-
-      ArrayList<String[]> arrayListData= DataTransform.getSbor(
-              UserData.getSborFromSQLite());
+            ArrayList<String[]> arrayListData= DataTransform.getSbor(
+                    UserData.getSborFromSQLite());
 
       /*
       arrayList.add("Sbor1;18.02.2015");
       arrayList.add("Sbor2;08.08.1015");
       arrayList.add("Sbor3;11.11.3015");
       */
-      TableOnForm tableOnForm=new TableOnForm();
-      tableOnForm.setDisplay2(display);
-      tableOnForm.load(arrayListData, "Sbori", "id", "name", "data_sbora",null,null);
+            TableOnForm tableOnForm=new TableOnForm();
+            tableOnForm.setDisplay2(display);
+            tableOnForm.load(arrayListData, "Sbori", "id", "name", "data_sbora",null,null);
 
 
+        }
+
+        public void widgetDefaultSelected(SelectionEvent event) {
+            label.setText("dictSboriItemiListener2222");
+        }
     }
 
-    public void widgetDefaultSelected(SelectionEvent event) {
-      label.setText("dictSboriItemiListener2222");
-    }
-  }
+    class dictTWLTCSTATUSItemListener implements SelectionListener {
+        public void widgetSelected(SelectionEvent event) {
+            label.setText("TWLTCSTATUS");
 
-  class dictTWLTCSTATUSItemListener implements SelectionListener {
-    public void widgetSelected(SelectionEvent event) {
-      label.setText("TWLTCSTATUS");
-
-      ArrayList<String[]> arrayListData= DataTransform.getTWLTCSTATUS(
-              UserData.getTWLTCSTATUSFromSQLite());
+            ArrayList<String[]> arrayListData= DataTransform.getTWLTCSTATUS(
+                    UserData.getTWLTCSTATUSFromSQLite());
       /*
       arrayList.add("Beg 100;Beg");
       arrayList.add("Beg 800;Beg");
@@ -188,22 +188,22 @@ public class App {
       arrayList.add("Razminka;CPY");
       arrayList.add("Rabota v parax;CTTM");
       */
-      TableOnForm tableOnForm=new TableOnForm();
-      tableOnForm.setDisplay2(display);
-      tableOnForm.load(arrayListData, "TWLTCSTATUS","id", "vTCSTATUS ", "vTCSTATUS_RU ",null,null);
+            TableOnForm tableOnForm=new TableOnForm();
+            tableOnForm.setDisplay2(display);
+            tableOnForm.load(arrayListData, "TWLTCSTATUS","id", "vTCSTATUS ", "vTCSTATUS_RU ",null,null);
+        }
+
+        public void widgetDefaultSelected(SelectionEvent event) {
+            label.setText("Saved");
+        }
     }
 
-    public void widgetDefaultSelected(SelectionEvent event) {
-      label.setText("Saved");
-    }
-  }
+    class dictTTCPERSONALItemListener implements SelectionListener {
+        public void widgetSelected(SelectionEvent event) {
+            label.setText("TTCPERSONAL");
 
-  class dictTTCPERSONALItemListener implements SelectionListener {
-    public void widgetSelected(SelectionEvent event) {
-      label.setText("TTCPERSONAL");
-
-      ArrayList<String[]> arrayListData= DataTransform.getTTCPERSONAL(
-              UserData.getTTCPERSONALFromSQLite());
+            ArrayList<String[]> arrayListData= DataTransform.getTTCPERSONAL(
+                    UserData.getTTCPERSONALFromSQLite());
       /*
       arrayList.add("Beg 100;Beg");
       arrayList.add("Beg 800;Beg");
@@ -212,24 +212,23 @@ public class App {
       arrayList.add("Razminka;CPY");
       arrayList.add("Rabota v parax;CTTM");
       */
-      TableOnForm tableOnForm=new TableOnForm();
-      tableOnForm.setDisplay2(display);
-      tableOnForm.load(arrayListData, "TTCPERSONAL","id",
-              "vSURNAME ", "vFIRSTNAME ","vMIDDLENAME",null);
+            TableOnForm tableOnForm=new TableOnForm();
+            tableOnForm.setDisplay2(display);
+            tableOnForm.load(arrayListData, "TTCPERSONAL","id",
+                    "vSURNAME ", "vFIRSTNAME ","vMIDDLENAME",null);
+        }
+
+        public void widgetDefaultSelected(SelectionEvent event) {
+            label.setText("Saved");
+        }
     }
 
-    public void widgetDefaultSelected(SelectionEvent event) {
-      label.setText("Saved");
-    }
-  }
+
+    class nagrzkaF9ItemListener implements SelectionListener {
+        public void widgetSelected(SelectionEvent event) {
+            label.setText("nagrzkaF9ItemListener");
 
 
-  class nagrzkaF9ItemListener implements SelectionListener {
-    public void widgetSelected(SelectionEvent event) {
-      label.setText("nagrzkaF9ItemListener");
-
-      ArrayList<String[]> arrayListData= DataTransform.getTWLMVALUES(
-              UserData.getTWLMVALUESFromSQLite());
       /*
       arrayList.add("Beg 100;Beg");
       arrayList.add("Beg 800;Beg");
@@ -239,41 +238,37 @@ public class App {
       arrayList.add("Rabota v parax;CTTM");
       */
 
-      ComboListOnForm comboListOnForm=new ComboListOnForm();
-      comboListOnForm.setDisplay2(display);
-      comboListOnForm.load(arrayListData, "TWLMVALUES", "id",
-              "vTCAMPID", "","vTCSID", "vTCTID", "vTRAININGDATE","vTTSEQUENCE","vTRAININGID"
-              ,"vTRAININGDUR_V","vMPULSEP10S_b");
+            ComboListOnForm comboListOnForm=new ComboListOnForm();
+            comboListOnForm.setDisplay2(display);
+            comboListOnForm.load( "TWLMVALUES", "id",
+                    "vTCAMPID", "","vTCSID", "vTCTID", "vTRAININGDATE","vTTSEQUENCE","vTRAININGID"
+                    ,"vTRAININGDUR_V","vMPULSEP10S_b");
 
 
+        }
+
+        public void widgetDefaultSelected(SelectionEvent event) {
+            label.setText("Saved2");
+        }
     }
 
-    public void widgetDefaultSelected(SelectionEvent event) {
-      label.setText("Saved2");
+
+
+
+
+
+
+    class helpGetHelpItemListener implements SelectionListener {
+        public void widgetSelected(SelectionEvent event) {
+            label.setText("No worries!");
+        }
+
+        public void widgetDefaultSelected(SelectionEvent event) {
+            label.setText("No worries!");
+        }
     }
-  }
 
-
-
-
-
-
-
-  class helpGetHelpItemListener implements SelectionListener {
-    public void widgetSelected(SelectionEvent event) {
-      label.setText("No worries!");
+    public static void main(String[] args) {
+        App menuExample = new App();
     }
-
-    public void widgetDefaultSelected(SelectionEvent event) {
-      label.setText("No worries!");
-    }
-  }
-
-  public static void main(String[] args) {
-    App menuExample = new App();
-  }
 }
-
-
-
-

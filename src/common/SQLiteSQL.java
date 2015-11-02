@@ -1,6 +1,8 @@
 package common;
 
 
+import model.TTCTEAMS;
+
 public class SQLiteSQL {
 
     private static String SQLselListSbor = null;
@@ -37,6 +39,14 @@ public class SQLiteSQL {
     private static String SQLinsTWLMVALUES=null;
     private static String SQLupdTWLMVALUES=null;
     private static String SQLdelTWLMVALUES=null;
+
+
+    private static String SQLselListTTCTEAMS=null;
+    private static String SQLselMaxIdTTCTEAMS=null;
+    private static String SQLinsTTCTEAMS=null;
+    private static String SQLupdTTCTEAMS=null;
+    private static String SQLdelTTCTEAMS=null;
+
 
     public static String getSQLselListTWLTCSTATUS()
     {
@@ -77,6 +87,47 @@ public class SQLiteSQL {
         }
         return SQLdelTWLTCSTATUS;
     }
+
+    public static String getSQLselListTTCTEAMS()
+    {
+        if (SQLselListTTCTEAMS == null) {
+            SQLselListTTCTEAMS = PropertiesBuilder.getProperty("SQLselListTTCTEAMS");
+        }
+        return SQLselListTTCTEAMS;
+    }
+
+    public static String SQLselMaxIdTTCTEAMS()
+    {
+        if (SQLselMaxIdTTCTEAMS == null) {
+            SQLselMaxIdTTCTEAMS = PropertiesBuilder.getProperty("SQLselMaxIdTTCTEAMS");
+        }
+        return SQLselMaxIdTTCTEAMS;
+    }
+
+    public static String SQLinsTTCTEAMS()
+    {
+        if (SQLinsTTCTEAMS == null) {
+            SQLinsTTCTEAMS = PropertiesBuilder.getProperty("SQLinsTTCTEAMS");
+        }
+        return SQLinsTTCTEAMS;
+    }
+
+    public static String SQLupdTTCTEAMS()
+    {
+        if (SQLupdTTCTEAMS == null) {
+            SQLupdTTCTEAMS = PropertiesBuilder.getProperty("SQLupdTTCTEAMS");
+        }
+        return SQLupdTTCTEAMS;
+    }
+
+    public static String SQLdelTTCTEAMS()
+    {
+        if (SQLdelTTCTEAMS == null) {
+            SQLdelTTCTEAMS = PropertiesBuilder.getProperty("SQLdelTTCTEAMS");
+        }
+        return SQLdelTTCTEAMS;
+    }
+
 
 
     public static String getSQLselListTTCPERSONAL()
@@ -226,8 +277,5 @@ public class SQLiteSQL {
         }
         return SQLselListUpragnenie;
     }
-
-
-
 
 }
