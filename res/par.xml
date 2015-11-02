@@ -39,7 +39,8 @@
     <entry key="SQLselMaxIdTTCTEAMS">SELECT max(id) FROM TTCTEAMS</entry>
     <entry key="SQLupdTTCTEAMS">update TTCTEAMS set vNAME='?1',vTEAMDESC='?2' where id=?3</entry>
     <entry key="SQLdelTTCTEAMS">delete from TTCTEAMS where id=?1</entry>
-	<entry key="SQLselIDTTCTEAMS">select t.ID from TTCTEAMS t where t.vNAME like '?1%'</entry>
+	<entry key="SQLselIdTTCTEAMS">select t.ID from TTCTEAMS t where t.vNAME like '?1%'</entry>
+	
 
     <entry key="SQLselListTWLMVALUES">select t.ID, t.vTCAMPID, t.vTCSID, t.vTCTID, t.vTRAININGDATE,t.vTTSEQUENCE,t.vTRAININGID
         ,t.vTRAININGDUR_V,t.vMPULSEP10S_b from TWLMVALUES t</entry>

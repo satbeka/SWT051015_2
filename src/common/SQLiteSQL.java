@@ -48,6 +48,8 @@ public class SQLiteSQL {
     private static String SQLinsTTCTEAMS=null;
     private static String SQLupdTTCTEAMS=null;
     private static String SQLdelTTCTEAMS=null;
+    private static String SQLselIdTTCTEAMS=null;
+
 
 
     public static String getSQLselListTWLTCSTATUS()
@@ -128,6 +130,14 @@ public class SQLiteSQL {
             SQLdelTTCTEAMS = PropertiesBuilder.getProperty("SQLdelTTCTEAMS");
         }
         return SQLdelTTCTEAMS;
+    }
+
+    public static String SQLselIdTTCTEAMS()
+    {
+        if (SQLselIdTTCTEAMS == null) {
+            SQLselIdTTCTEAMS = PropertiesBuilder.getProperty("SQLselIdTTCTEAMS");
+        }
+        return SQLselIdTTCTEAMS;
     }
 
 
