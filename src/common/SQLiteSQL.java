@@ -33,12 +33,14 @@ public class SQLiteSQL {
     private static String SQLinsTTCPERSONAL=null;
     private static String SQLupdTTCPERSONAL=null;
     private static String SQLdelTTCPERSONAL=null;
+    private static String SQLselIdTTCPERSONAL=null;
 
     private static String SQLselListTWLMVALUES=null;
     private static String SQLselMaxIdTWLMVALUES=null;
     private static String SQLinsTWLMVALUES=null;
     private static String SQLupdTWLMVALUES=null;
     private static String SQLdelTWLMVALUES=null;
+    private static String SQLselListTWLMVALUES_wherePersAndTeam=null;
 
 
     private static String SQLselListTTCTEAMS=null;
@@ -170,6 +172,24 @@ public class SQLiteSQL {
         return SQLdelTTCPERSONAL;
     }
 
+
+    public static String SQLselIdTTCPERSONAL()
+    {
+        if (SQLselIdTTCPERSONAL == null) {
+            SQLselIdTTCPERSONAL = PropertiesBuilder.getProperty("SQLselIdTTCPERSONAL");
+        }
+        return SQLselIdTTCPERSONAL;
+    }
+
+
+
+    public static String SQLselListTWLMVALUES_wherePersAndTeam()
+    {
+        if (SQLselListTWLMVALUES_wherePersAndTeam == null) {
+            SQLselListTWLMVALUES_wherePersAndTeam = PropertiesBuilder.getProperty("SQLselListTWLMVALUES_wherePersAndTeam");
+        }
+        return SQLselListTWLMVALUES_wherePersAndTeam;
+    }
 
     public static String getSQLselListTWLMVALUES()
     {

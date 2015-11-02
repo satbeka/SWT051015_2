@@ -34,7 +34,7 @@ public class ComboListOnForm {
     private Combo comboDropDown;// = new Combo(shell2, SWT.DROP_DOWN | SWT.BORDER);
 
     Menu contextMenu;
-    final ArrayList<String[]> arrayListData=new ArrayList<>();
+    ArrayList<String[]> arrayListData=new ArrayList<>();
 
     public void load(String tabTitle,String itTitleId,
                      String itTitle1,String itTitle2,String itTitle3,String itTitle4,String itTitle5,
@@ -175,7 +175,8 @@ public class ComboListOnForm {
                         System.out.println("c2.getText()="+c2.getText());
 
                         int size=table.getColumnCount();
-                        arrayListData =DataTransform.getTWLMVALUES(UserData.getTWLMVALUESFromSQLite());
+                        arrayListData =DataTransform.getTWLMVALUES(
+                                UserData.getTWLMVALUESFromSQLite(c1.getText(),c2.getText()));
                         int sizeData= arrayListData.size();
                         String[] arrV=new String[size];
                         for (int i = 0; i < sizeData; i++) {

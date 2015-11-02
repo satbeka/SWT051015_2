@@ -478,6 +478,7 @@ public class UserData  {
 
     }
 
+
     public static ArrayList<TTCPERSONAL> getTTCPERSONALFromSQLite() {
 
         ArrayList<TTCPERSONAL> listTTCPERSONAL = new ArrayList<TTCPERSONAL>();
@@ -538,8 +539,6 @@ public class UserData  {
         return listTTCPERSONAL;
 
     }
-
-
 
     public static String insTTCPERSONAL(String[] arrV) {
 
@@ -763,6 +762,72 @@ public class UserData  {
 
     }
 
+    public static String getIdTTCPERSONALid(String c1Txt) {
+
+        String id="--";
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.SQLselIdTTCPERSONAL();
+
+        System.out.println("SqlView SQLselIdTTCPERSONAL SQLite=" + SqlView);
+
+
+
+        try {
+
+
+            String replOld;
+            //String str;
+            replOld="?1";
+            String vFIRSTNAME=c1Txt.substring(0, c1Txt.indexOf(" "));
+            System.out.println("vFIRSTNAME="+vFIRSTNAME);
+            String vSURNAME=c1Txt.substring(c1Txt.indexOf(" ")+2);
+            System.out.println("vSURNAME="+vSURNAME);
+
+            SqlView=SqlView.replace(replOld, vFIRSTNAME);
+            SqlView=SqlView.replace("?2", vSURNAME);
+
+            System.out.println("SqlView=" + SqlView);
+            //System.out.println("str="+str);
+
+            Statement stmt = null;
+            Statement statement = conn.createStatement();
+            ResultSet rs=statement.executeQuery(SqlView);
+            System.out.println("   User SqlView.executeQ().......");
+
+            stmt.executeUpdate(SqlView);
+            int k = 0;
+
+            while (rs.next()) {
+
+                id=rs.getString(1);
+                System.out.println("tTCPERSONAL rs.get(1)=" + rs.getString(1));
+                k++;
+
+            };
+
+
+
+
+            if (stmt != null) {
+                stmt.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return id;
+
+    }
 
 
     public static ArrayList<TTCTEAMS> getTTCTEAMSFromSQLite() {
@@ -824,8 +889,6 @@ public class UserData  {
         return listTTCTEAMS;
 
     }
-
-
 
     public static String insTTCTEAMS(String[] arrV) {
 
@@ -1119,10 +1182,12 @@ public class UserData  {
 
     public static ArrayList<TWLMVALUES> getTWLMVALUESFromSQLite(String pers,String team) {
 
-        ArrayList<TWLMVALUES> listTWLMVALUES = new ArrayList<TWLMVALUES>();
 
+        String idPers=UserData.getIdTTCPERSONALid(pers);
+
+        ArrayList<TWLMVALUES> listTWLMVALUES = new ArrayList<TWLMVALUES>();
         Connection conn = SQLiteDB.connectDB();
-        String SqlView = SQLiteSQL.getSQLselListTWLMVALUES();
+        String SqlView = SQLiteSQL.SQLselListTWLMVALUES_wherePersAndTeam();
 
         System.out.println("SqlView SQLite=" + SqlView);
         if (conn==null){
