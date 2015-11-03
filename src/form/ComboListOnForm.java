@@ -1,5 +1,6 @@
 package form;
 import dboperation.UserData;
+import javafx.scene.chart.Chart;
 import model.TTCPERSONAL;
 import model.TTCTEAMS;
 import org.eclipse.swt.SWT;
@@ -10,7 +11,9 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 import util.DataTransform;
+import util.Export2Excel;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -95,18 +98,66 @@ public class ComboListOnForm {
 
 
 
-
-
         Button buttonDiagrm=new Button(shell2,SWT.BUTTON2);
         buttonDiagrm.setText("Diagamma");
 
+        buttonDiagrm.addListener(SWT.Selection, new Listener() {
+            public void handleEvent(Event e) {
+                switch (e.type) {
+                    case SWT.Selection:
+                        System.out.println("Button pressed");
+
+
+                        // create a chart
+                        ChartOnForm chartOnForm=new ChartOnForm();
+                        chartOnForm.setDisplay3(display2);
+                        chartOnForm.create();
+
+                        break;
+                }
+            }
+        });
+
+
         Button buttonExl=new Button(shell2,SWT.BUTTON2);
         buttonExl.setText("Export Excel");
+        buttonExl.addListener(SWT.Selection, new Listener() {
+            public void handleEvent(Event e) {
+                switch (e.type) {
+                    case SWT.Selection:
+                        System.out.println("Button pressed");
+
+
+                        // create a excel
+
+                        int size=table.getColumnCount();
+                        String[] coloumNames=new String[size];
+                        for (int i = 0; i < size; ) {
+
+                            System.out.println("table.getColumn(i).getText()="+table.getColumn(i).getText());
+                            coloumNames[i]=table.getColumn(i).getText();
+                            i++;
+
+                        }
+                        arrayListData =DataTransform.getTWLMVALUES(
+                                UserData.getTWLMVALUESFromSQLite(c1.getText(),c2.getText()));
+
+                        String sheetName="sheet1111";
+
+                        Export2Excel export2Excel=new Export2Excel(shell2,coloumNames,arrayListData,sheetName);
+      //Export2Excel(Shell shell, String[] coloumNames, ResultSet rSet, String sheetName)
+
+                         break;
+                }
+            }
+        });
+
+
 
 
         shell2.setLayout(gridLayout);
 
-        table = new Table(shell2, SWT.HIDE_SELECTION | SWT.SINGLE | SWT.FULL_SELECTION | SWT.BORDER);
+        table = new Table(shell2, SWT.SINGLE | SWT.FULL_SELECTION | SWT.BORDER);
         //TWLMVALUES
         //"vTCAMPID", "vTCSID", "vTCTID", "vTRAININGDATE","vTTSEQUENCE","vTRAININGID"
         //      ,"vTRAININGDUR_V","vMPULSEP10S_b"
@@ -174,6 +225,7 @@ public class ComboListOnForm {
                     if (c2.getText()!=null){
                         System.out.println("c2.getText()="+c2.getText());
 
+                        shell2.open();
                         int size=table.getColumnCount();
                         arrayListData =DataTransform.getTWLMVALUES(
                                 UserData.getTWLMVALUESFromSQLite(c1.getText(),c2.getText()));
@@ -187,6 +239,10 @@ public class ComboListOnForm {
                             item.setText(arrV);
 
                         }
+
+
+                        //shell2.dispose();
+                        shell2.pack();
 
 
                     }

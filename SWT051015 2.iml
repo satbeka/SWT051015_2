@@ -14,5 +14,8 @@
     <orderEntry type="library" exported="" scope="PROVIDED" name="sqlite-jdbc-3.7.2" level="project" />
     <orderEntry type="library" name="swt" level="project" />
     <orderEntry type="library" name="sqlite-jdbc-3.7.2 (2)" level="project" />
+    <orderEntry type="library" name="org.swtchart.ext_0.9.0.v20140219" level="project" />
+    <orderEntry type="library" name="org.swtchart_0.9.0.v20140219" level="project" />
+    <orderEntry type="library" name="jxl-2.6" level="project" />
   </component>
 </module>

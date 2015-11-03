@@ -75,23 +75,23 @@ public class UserData  {
         //System.out.println("engCod="+engCod);
         if (engCod.contains("JURRZ")) {
             //System.out.println(" ur lico   ");
-            return "Юр.лицо    " + "\n" + " (резидент РК)";
+            return "??.????    " + "\n" + " (???????? ??)";
         }
         if (engCod.contains("FIZRZ")) {
-            return "Физ.лицо (резидент РК)";
+            return "???.???? (???????? ??)";
         }
         if (engCod.contains("JURNN")) {
-            return "Юр.лицо       \"+\"\\n\"+\" (нерезидент)";
+            return "??.????       \"+\"\\n\"+\" (??????????)";
         }
         if (engCod.contains("FIZNN")) {
-            return "Физ.лицо (нерезидент)";
+            return "???.???? (??????????)";
         }
 
         if (engCod.contains("STBNK")) {
-            return "Банк второго уровня РК";
+            return "???? ??????? ?????? ??";
         }
         if (engCod.contains("INSOR")) {
-            return "Страховая организация РК";
+            return "????????? ??????????? ??";
         }
 
 
@@ -333,7 +333,6 @@ public class UserData  {
             DateFormat df = new SimpleDateFormat("YYYY-MM-DD");
             pStatement.setString(3, df.format(date));
             System.out.println("df.format(date)="+df.format(date));
-
             pStatement.executeUpdate(SqlView);
             System.out.println("   User SqlView.executeQ().......");
             pStatement.close();
@@ -1106,6 +1105,69 @@ public class UserData  {
 
     }
 
+    public static String getIdTTCTEAMSid(String c2Txt) {
+
+        String id="--";
+
+        Connection conn = SQLiteDB.connectDB();
+        String SqlView = SQLiteSQL.SQLselIdTTCTEAMS();
+
+        System.out.println("SqlView SQLselIdTTCTEAMS SQLite=" + SqlView);
+
+
+
+        try {
+
+
+            String replOld;
+            //String str;
+            replOld="?1";
+            String vNAME=c2Txt;
+            System.out.println("vNAME="+vNAME);
+            SqlView=SqlView.replace(replOld, vNAME);
+            System.out.println("SqlView=" + SqlView);
+            //System.out.println("str="+str);
+
+            Statement stmt = null;
+            Statement statement = conn.createStatement();
+            ResultSet rs=statement.executeQuery(SqlView);
+            System.out.println("   User SqlView.executeQ().......");
+
+            //stmt.executeUpdate(SqlView);
+            int k = 0;
+
+            while (rs.next()) {
+
+                id=rs.getString(1);
+                System.out.println("TTCTEAMS rs.get(1)=" + rs.getString(1));
+                k++;
+
+            };
+
+
+
+
+            if (stmt != null) {
+                stmt.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------");
+        //System.out.println(listTisr_non_market);
+
+        return id;
+
+    }
+
+
 
     public static ArrayList<TWLMVALUES> getTWLMVALUESFromSQLite() {
 
@@ -1200,9 +1262,19 @@ public class UserData  {
 
         try {
 
+
+            String replOld;
+            //String str;
+            replOld="?1";
+            System.out.println("idPers="+idPers);
+            SqlView=SqlView.replace(replOld, idPers);
+            SqlView=SqlView.replace("?2", idTeam);
+
+            System.out.println("SqlView=" + SqlView);
+            //System.out.println("str="+str);
+
+            Statement stmt = null;
             Statement statement = conn.createStatement();
-
-
             ResultSet rs=statement.executeQuery(SqlView);
             System.out.println("   User SqlView.executeQ().......");
             //conn.commit();
@@ -1646,7 +1718,6 @@ public class UserData  {
             DateFormat df = new SimpleDateFormat("YYYY-MM-DD");
             pStatement.setString(3, df.format(date));
             System.out.println("df.format(date)="+df.format(date));
-
             pStatement.executeUpdate(SqlView);
             System.out.println("   User SqlView.executeQ().......");
             pStatement.close();
