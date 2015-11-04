@@ -42,7 +42,7 @@ public class ChartOnForm {
         shell3 = new Shell(display3);
 
         shell3.setSize(500, 500);
-        shell3.setText("Dive Profile");
+        shell3.setText("Chart Sportsmens");
         shell3.setSize(500, 400);
         shell3.setLayout(new FillLayout());
         createChart(shell3);
@@ -64,9 +64,9 @@ public class ChartOnForm {
 // create a chart
         Chart chart = new Chart(parent, SWT.NONE);
 // set titles
-        chart.getTitle().setText("Dive profile");
-        chart.getAxisSet().getXAxis(0).getTitle().setText("Time");
-        chart.getAxisSet().getYAxis(0).getTitle().setText("Depth");
+        chart.getTitle().setText("Chart Sportsmens");
+        chart.getAxisSet().getXAxis(0).getTitle().setText("XAxis Time");
+        chart.getAxisSet().getYAxis(0).getTitle().setText("YAxis Depth");
 // create scatter series
         ILineSeries series = (ILineSeries) chart.getSeriesSet()
                 .createSeries(SeriesType.LINE, "series");

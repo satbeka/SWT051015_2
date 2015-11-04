@@ -41,7 +41,7 @@ public class App {
 
         display = new Display();
         shell = new Shell(display);
-        shell.setText("Menu Racshet ?????? ????????");
+        shell.setText("Menu Racshet from Anar$Company");
         shell.setSize(600, 300);
 
         label = new Label(shell, SWT.CENTER);
@@ -55,7 +55,7 @@ public class App {
         fileMenuHeader.setMenu(fileMenu);
 
         fileSaveItem = new MenuItem(fileMenu, SWT.PUSH);
-        fileSaveItem.setText("&Change PWD ??????? ??????");
+        fileSaveItem.setText("&Change PWD");
 
         fileExitItem = new MenuItem(fileMenu, SWT.PUSH);
         fileExitItem.setText("E&xit");
@@ -73,17 +73,17 @@ public class App {
 
 
         dictTWLTCSTATUSItem = new MenuItem(dictMenu, SWT.PUSH);
-        dictTWLTCSTATUSItem.setText("&TWLTCSTATUS");
+        dictTWLTCSTATUSItem.setText("&Статус ");
 
         dictTTCPERSONALItem = new MenuItem(dictMenu, SWT.PUSH);
-        dictTTCPERSONALItem.setText("&TTCPERSONAL");
+        dictTTCPERSONALItem.setText("&Спортсмены TTCPERSONAL");
 
         //dict
 
 
         //nagryz
         nagrzkaMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
-        nagrzkaMenuHeader.setText("&Nagryzka");
+        nagrzkaMenuHeader.setText("&Расчет нагрзок Nagryzka");
 
         nagrzkaMenu = new Menu(shell, SWT.DROP_DOWN);
         nagrzkaMenuHeader.setMenu(nagrzkaMenu);
@@ -190,7 +190,7 @@ public class App {
       */
             TableOnForm tableOnForm=new TableOnForm();
             tableOnForm.setDisplay2(display);
-            tableOnForm.load(arrayListData, "TWLTCSTATUS","id", "vTCSTATUS ", "vTCSTATUS_RU ",null,null);
+            tableOnForm.load(arrayListData, "TWLTCSTATUS","id", "vTCSTATUS ", "Статус_Ру vTCSTATUS_RU ",null,null);
         }
 
         public void widgetDefaultSelected(SelectionEvent event) {

@@ -1,19 +1,18 @@
 package form;
 import dboperation.UserData;
-import javafx.scene.chart.Chart;
+
 import model.TTCPERSONAL;
 import model.TTCTEAMS;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableCursor;
 import org.eclipse.swt.events.*;
-import org.eclipse.swt.layout.FillLayout;
+
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 import util.DataTransform;
 import util.Export2Excel;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -109,7 +108,7 @@ public class ComboListOnForm {
 
 
                         // create a chart
-                        ChartOnForm chartOnForm=new ChartOnForm();
+                        ChartOnForm chartOnForm = new ChartOnForm();
                         chartOnForm.setDisplay3(display2);
                         chartOnForm.create();
 
@@ -130,24 +129,24 @@ public class ComboListOnForm {
 
                         // create a excel
 
-                        int size=table.getColumnCount();
-                        String[] coloumNames=new String[size];
+                        int size = table.getColumnCount();
+                        String[] coloumNames = new String[size];
                         for (int i = 0; i < size; ) {
 
-                            System.out.println("table.getColumn(i).getText()="+table.getColumn(i).getText());
-                            coloumNames[i]=table.getColumn(i).getText();
+                            System.out.println("table.getColumn(i).getText()=" + table.getColumn(i).getText());
+                            coloumNames[i] = table.getColumn(i).getText();
                             i++;
 
                         }
-                        arrayListData =DataTransform.getTWLMVALUES(
-                                UserData.getTWLMVALUESFromSQLite(c1.getText(),c2.getText()));
+                        arrayListData = DataTransform.getTWLMVALUES(
+                                UserData.getTWLMVALUESFromSQLite(c1.getText(), c2.getText()));
 
-                        String sheetName="sheet1111";
+                        String sheetName = "sheet1111";
 
-                        Export2Excel export2Excel=new Export2Excel(shell2,coloumNames,arrayListData,sheetName);
-      //Export2Excel(Shell shell, String[] coloumNames, ResultSet rSet, String sheetName)
+                        Export2Excel export2Excel = new Export2Excel(shell2, coloumNames, arrayListData, sheetName);
+                        //Export2Excel(Shell shell, String[] coloumNames, ResultSet rSet, String sheetName)
 
-                         break;
+                        break;
                 }
             }
         });
@@ -220,16 +219,19 @@ public class ComboListOnForm {
 
         c1.addSelectionListener(new SelectionAdapter() {
             public void widgetSelected(SelectionEvent e) {
-                if (c1.getText()!=null) {
-                    System.out.println("c1.getText()="+c1.getText());
-                    if (c2.getText()!=null){
-                        System.out.println("c2.getText()="+c2.getText());
+                if (!c1.getText().isEmpty()) {
+                    System.out.println("c1 c1.getText()="+c1.getText());
+                    if (!c2.getText().isEmpty()){
+                        System.out.println("c1 c2.getText()="+c2.getText());
 
                         shell2.open();
                         int size=table.getColumnCount();
+                        int kk=table.getItemCount();
+                        System.out.println("kk="+kk);
                         arrayListData =DataTransform.getTWLMVALUES(
                                 UserData.getTWLMVALUESFromSQLite(c1.getText(),c2.getText()));
                         int sizeData= arrayListData.size();
+                        System.out.println("sizeData="+sizeData);
                         String[] arrV=new String[size];
                         for (int i = 0; i < sizeData; i++) {
 
@@ -238,6 +240,21 @@ public class ComboListOnForm {
                             arrV= arrayListData.get(i);
                             item.setText(arrV);
 
+                        }
+                        System.out.println(" size==0 ");
+                        if (sizeData==0){
+                            /*
+                            int k=table.getSelectionIndices();
+                            //table.setRedraw(true);
+                            table.setVisible(false);
+                            table.remove(0, k);
+                            table.setVisible(true);
+                            */
+                            //table.remove (0,kk);
+                            table.removeAll();
+                            System.out.println("tab upd");
+                            //TableItem item = new TableItem(table, SWT.NONE);
+                            //item.setText("");
                         }
 
 
@@ -259,6 +276,51 @@ public class ComboListOnForm {
             }
         });
 
+        c2.addSelectionListener(new SelectionAdapter() {
+            public void widgetSelected(SelectionEvent e) {
+                if (!c1.getText().isEmpty()) {
+                    System.out.println("c2 c1.getText()=" + c1.getText());
+                    if (c2.getText()!=null){
+                        System.out.println("c2 c2.getText()="+c2.getText());
+
+                        shell2.open();
+                        int size=table.getColumnCount();
+                        arrayListData =DataTransform.getTWLMVALUES(
+                                UserData.getTWLMVALUESFromSQLite(c1.getText(),c2.getText()));
+                        int sizeData= arrayListData.size();
+                        String[] arrV=new String[size];
+                        for (int i = 0; i < sizeData; i++) {
+
+                            // ok now store it in the table
+                            TableItem item = new TableItem(table, SWT.NONE);
+                            arrV= arrayListData.get(i);
+                            item.setText(arrV);
+
+                        }
+                        System.out.println(" size==0 ");
+                        if (sizeData==0){
+
+                            table.removeAll();
+                            System.out.println("tab upd");
+
+                        }
+
+                        shell2.pack();
+
+
+                    }
+
+
+
+                } else if (c1.getText().equals("Item Two")) {
+                    String newItems[] = { "Item Two A", "Item Two B",
+                            "Item Two C" };
+                    c2.setItems(newItems);
+                    c2.setEnabled(true);
+                }
+
+            }
+        });
 
 
 
