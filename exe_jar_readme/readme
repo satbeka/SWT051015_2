@@ -1,0 +1,3 @@
+Before run need to create directory: C/work
+put into their wl2015f_sqlite.s3db and par.xml (params of DB operation and connect)
+now run a55.jar (for 32 OS)
